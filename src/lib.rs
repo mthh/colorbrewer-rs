@@ -1,3 +1,16 @@
+//! # colorbrewer
+//! **Library providing colors from ColorBrewer.**
+//!
+//! Licensed under Apache License, Version 2.0.
+//!
+//!
+//! Use one member of the `Palette` `Enum` and the requested number of colors
+//! to get the corresponding color ramp with the `get_color_ramp` function.
+//! The colors are described by their hexadecimal code.
+//!
+//! These color specifications and designs are developed by Cynthia Brewer (http://colorbrewer2.org/).
+//!
+
 /// Available color palettes
 pub enum Palette {
     YlGn,
@@ -37,10 +50,11 @@ pub enum Palette {
     Set3,
 }
 
-/// Function the get the requested coloramp
+/// Function to get the requested color ramp
 /// according to a given name and number of colors.
-pub fn get_ramp(name: Palette, nb_value: u32) -> Option<Vec<&'static str>> {
-    let res = match name {
+/// Return `None` if there is no color ramp defined for this value of `nb_value`.
+pub fn get_color_ramp(name: Palette, nb_value: u32) -> Option<Vec<&'static str>> {
+    match name {
         Palette::YlGn => {
             match nb_value {
                 3 => Some(vec!["#f7fcb9", "#addd8e", "#31a354"]),
@@ -856,17 +870,16 @@ pub fn get_ramp(name: Palette, nb_value: u32) -> Option<Vec<&'static str>> {
                 _ => None,
             }
         }
-    };
-    res
+    }
 }
 
 
 #[cfg(test)]
 mod tests {
-    use {Palette, get_ramp};
+    use {Palette, get_color_ramp};
     #[test]
     fn it_works() {
-        let ramp = get_ramp(Palette::Pastel2, 3);
+        let ramp = get_color_ramp(Palette::Pastel2, 3);
         assert_eq!(ramp, Some(vec!["#b3e2cd", "#fdcdac", "#cbd5e8"]))
     }
 }

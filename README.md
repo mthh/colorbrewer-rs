@@ -9,11 +9,11 @@ These color specifications and designs are developed by Cynthia Brewer (http://c
 use colorbrewer::{Palette, get_ramp};
 
 // Use an existing palette from the `Palette` Enum and the wanted number of colors:
-let ramp = get_ramp(Palette::Pastel2, 3);
+let ramp = get_color_ramp(Palette::Pastel2, 3);
 assert_eq!(ramp, Some(vec!["#b3e2cd", "#fdcdac", "#cbd5e8"]));
 
 // `None` is returned if the number is invalid:
-let ramp = get_ramp(Palette::Pastel2, 35);
+let ramp = get_color_ramp(Palette::Pastel2, 35);
 assert_eq!(ramp, None);
 ```
 

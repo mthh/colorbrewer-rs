@@ -2,7 +2,7 @@
 name = "colorbrewer"
 version = "0.1.0"
 authors = ["mthh <matthieu.viry@cnrs.fr>"]
-description = "Library proving colors from ColorBrewer"
+description = "Library providing colors from ColorBrewer"
 license = "Apache-2.0"
 repository = "https://github.com/mthh/colorbrewer-rs"
 readme = "README.md"
