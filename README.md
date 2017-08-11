@@ -12,6 +12,11 @@ use colorbrewer::{Palette, get_ramp};
 let ramp = get_color_ramp(Palette::Pastel2, 3);
 assert_eq!(ramp, Some(vec!["#b3e2cd", "#fdcdac", "#cbd5e8"]));
 
+// Or match the name of one palette with the corresponding Enum variant
+// using the 'parse' method of a string:
+let blue_pal: Palette = "Blues".parse().unwrap();
+let ramp = get_color_ramp(blue_pal, 5);
+
 // `None` is returned if the number is invalid:
 let ramp = get_color_ramp(Palette::Pastel2, 35);
 assert_eq!(ramp, None);

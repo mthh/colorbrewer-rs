@@ -6,8 +6,26 @@
 //!
 //! Use one member of the `Palette` `Enum` and the requested number of colors
 //! to get the corresponding color ramp with the `get_color_ramp` function.
-//! The colors are described by their hexadecimal code.
 //!
+//! ```rust
+//! use colorbrewer::*;
+//!
+//! let ramp_orange = get_color_ramp(Palette::Oranges, 3);
+//! assert_eq!(Some(vec!["#fee6ce", "#fdae6b", "#e6550d"]), ramp_orange);
+//! ```
+//! <br>
+//! One can also get the corresponding `Palette` enum variant from it's name as a String
+//! as it implements the `FromStr` trait.
+//!
+//! ```rust
+//! use colorbrewer::*;
+//!
+//! let blue_pal: Palette = "Blues".parse().unwrap();
+//! assert_eq!(blue_pal, Palette::Blues);
+//! let ramp = get_color_ramp(blue_pal, 3);
+//! ```
+//! <br>
+//! Colors are described by their hexadecimal code.<br>
 //! These color specifications and designs are developed by Cynthia Brewer (http://colorbrewer2.org/).
 //!
 
