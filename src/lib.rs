@@ -12,6 +12,7 @@
 //!
 
 /// Available color palettes
+#[derive(Debug, PartialEq)]
 pub enum Palette {
     YlGn,
     YlGnBu,
@@ -48,6 +49,51 @@ pub enum Palette {
     Set1,
     Set2,
     Set3,
+}
+
+impl std::str::FromStr for Palette {
+    type Err = &'static str;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "YlGn" => Ok(Palette::YlGn),
+            "YlGnBu" => Ok(Palette::YlGnBu),
+            "GnBu" => Ok(Palette::GnBu),
+            "BuGn" => Ok(Palette::BuGn),
+            "PuBuGn" => Ok(Palette::PuBuGn),
+            "PuBu" => Ok(Palette::PuBu),
+            "BuPu" => Ok(Palette::BuPu),
+            "RdPu" => Ok(Palette::RdPu),
+            "PuRd" => Ok(Palette::PuRd),
+            "OrRd" => Ok(Palette::OrRd),
+            "YlOrRd" => Ok(Palette::YlOrRd),
+            "YlOrBr" => Ok(Palette::YlOrBr),
+            "Purples" => Ok(Palette::Purples),
+            "Blues" => Ok(Palette::Blues),
+            "Greens" => Ok(Palette::Greens),
+            "Oranges" => Ok(Palette::Oranges),
+            "Reds" => Ok(Palette::Reds),
+            "Greys" => Ok(Palette::Greys),
+            "PuOr" => Ok(Palette::PuOr),
+            "BrBG" => Ok(Palette::BrBG),
+            "PRGn" => Ok(Palette::PRGn),
+            "PiYG" => Ok(Palette::PiYG),
+            "RdBu" => Ok(Palette::RdBu),
+            "RdGy" => Ok(Palette::RdGy),
+            "RdYlBu" => Ok(Palette::RdYlBu),
+            "Spectral" => Ok(Palette::Spectral),
+            "RdYlGn" => Ok(Palette::RdYlGn),
+            "Accent" => Ok(Palette::Accent),
+            "Dark2" => Ok(Palette::Dark2),
+            "Paired" => Ok(Palette::Paired),
+            "Pastel1" => Ok(Palette::Pastel1),
+            "Pastel2" => Ok(Palette::Pastel2),
+            "Set1" => Ok(Palette::Set1),
+            "Set2" => Ok(Palette::Set2),
+            "Set3" => Ok(Palette::Set3),
+            _ => Err("not a valid value"),
+        }
+    }
 }
 
 /// Function to get the requested color ramp
@@ -880,6 +926,10 @@ mod tests {
     #[test]
     fn it_works() {
         let ramp = get_color_ramp(Palette::Pastel2, 3);
-        assert_eq!(ramp, Some(vec!["#b3e2cd", "#fdcdac", "#cbd5e8"]))
+        assert_eq!(ramp, Some(vec!["#b3e2cd", "#fdcdac", "#cbd5e8"]));
+
+        let palette_pastel2: Palette = "Pastel2".parse().unwrap();
+        assert_eq!(palette_pastel2, Palette::Pastel2);
+        assert_eq!(get_color_ramp(palette_pastel2, 3), ramp);
     }
 }
