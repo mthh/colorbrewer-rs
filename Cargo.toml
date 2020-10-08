@@ -1,9 +1,13 @@
 [package]
 name = "colorbrewer"
-version = "0.1.0"
-authors = ["mthh <matthieu.viry@cnrs.fr>"]
+version = "0.2.0"
+authors = ["mthh <matthieu.viry@univ-grenoble-alpes.fr>"]
+edition = "2018"
 description = "Library providing colors from ColorBrewer"
 license = "Apache-2.0"
 repository = "https://github.com/mthh/colorbrewer-rs"
 readme = "README.md"
 keywords = ["color", "palette"]
+
+[dependencies]
+rgb = "0.8"

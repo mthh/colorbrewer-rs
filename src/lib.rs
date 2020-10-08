@@ -11,7 +11,7 @@
 //! use colorbrewer::*;
 //!
 //! let ramp_orange = get_color_ramp(Palette::Oranges, 3);
-//! assert_eq!(Some(vec!["#fee6ce", "#fdae6b", "#e6550d"]), ramp_orange);
+//! assert_eq!(Some(vec![rgb::RGB { r: 254, g: 230, b: 206}, rgb::RGB { r: 253, g: 174, b: 107}, rgb::RGB { r: 230, g: 85, b: 13}]), ramp_orange);
 //! ```
 //! <br>
 //! One can also get the corresponding `Palette` enum variant from it's name as a String
@@ -28,6 +28,8 @@
 //! Colors are described by their hexadecimal code.<br>
 //! These color specifications and designs are developed by Cynthia Brewer (http://colorbrewer2.org/).
 //!
+
+use rgb::RGB;
 
 /// Available color palettes
 #[derive(Debug, PartialEq)]
@@ -117,837 +119,8996 @@ impl std::str::FromStr for Palette {
 /// Function to get the requested color ramp
 /// according to a given name and number of colors.
 /// Return `None` if there is no color ramp defined for this value of `nb_value`.
-pub fn get_color_ramp(name: Palette, nb_value: u32) -> Option<Vec<&'static str>> {
+pub fn get_color_ramp(name: Palette, nb_value: u32) -> Option<Vec<RGB<u8>>> {
     match name {
-        Palette::YlGn => {
-            match nb_value {
-                3 => Some(vec!["#f7fcb9", "#addd8e", "#31a354"]),
-                4 => Some(vec!["#ffffcc", "#c2e699", "#78c679", "#238443"]),
-                5 => Some(vec!["#ffffcc", "#c2e699", "#78c679", "#31a354", "#006837"]),
-                6 => Some(vec!["#ffffcc", "#d9f0a3", "#addd8e", "#78c679", "#31a354", "#006837"]),
-                7 => {
-                    Some(vec!["#ffffcc", "#d9f0a3", "#addd8e", "#78c679", "#41ab5d", "#238443",
-                              "#005a32"])
-                }
-                8 => {
-                    Some(vec!["#ffffe5", "#f7fcb9", "#d9f0a3", "#addd8e", "#78c679", "#41ab5d",
-                              "#238443", "#005a32"])
-                }
-                9 => {
-                    Some(vec!["#ffffe5", "#f7fcb9", "#d9f0a3", "#addd8e", "#78c679", "#41ab5d",
-                              "#238443", "#006837", "#004529"])
-                }
-                _ => None,
-            }
-        }
-        Palette::YlGnBu => {
-            match nb_value {
-                3 => Some(vec!["#edf8b1", "#7fcdbb", "#2c7fb8"]),
-                4 => Some(vec!["#ffffcc", "#a1dab4", "#41b6c4", "#225ea8"]),
-                5 => Some(vec!["#ffffcc", "#a1dab4", "#41b6c4", "#2c7fb8", "#253494"]),
-                6 => Some(vec!["#ffffcc", "#c7e9b4", "#7fcdbb", "#41b6c4", "#2c7fb8", "#253494"]),
-                7 => {
-                    Some(vec!["#ffffcc", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8",
-                              "#0c2c84"])
-                }
-                8 => {
-                    Some(vec!["#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0",
-                              "#225ea8", "#0c2c84"])
-                }
-                9 => {
-                    Some(vec!["#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0",
-                              "#225ea8", "#253494", "#081d58"])
-                }
-                _ => None,
-            }
-        }
-        Palette::GnBu => {
-            match nb_value {
-                3 => Some(vec!["#e0f3db", "#a8ddb5", "#43a2ca"]),
-                4 => Some(vec!["#f0f9e8", "#bae4bc", "#7bccc4", "#2b8cbe"]),
-                5 => Some(vec!["#f0f9e8", "#bae4bc", "#7bccc4", "#43a2ca", "#0868ac"]),
-                6 => Some(vec!["#f0f9e8", "#ccebc5", "#a8ddb5", "#7bccc4", "#43a2ca", "#0868ac"]),
-                7 => {
-                    Some(vec!["#f0f9e8", "#ccebc5", "#a8ddb5", "#7bccc4", "#4eb3d3", "#2b8cbe",
-                              "#08589e"])
-                }
-                8 => {
-                    Some(vec!["#f7fcf0", "#e0f3db", "#ccebc5", "#a8ddb5", "#7bccc4", "#4eb3d3",
-                              "#2b8cbe", "#08589e"])
-                }
-                9 => {
-                    Some(vec!["#f7fcf0", "#e0f3db", "#ccebc5", "#a8ddb5", "#7bccc4", "#4eb3d3",
-                              "#2b8cbe", "#0868ac", "#084081"])
-                }
-                _ => None,
-            }
-        }
-        Palette::BuGn => {
-            match nb_value {
-                3 => Some(vec!["#e5f5f9", "#99d8c9", "#2ca25f"]),
-                4 => Some(vec!["#edf8fb", "#b2e2e2", "#66c2a4", "#238b45"]),
-                5 => Some(vec!["#edf8fb", "#b2e2e2", "#66c2a4", "#2ca25f", "#006d2c"]),
-                6 => Some(vec!["#edf8fb", "#ccece6", "#99d8c9", "#66c2a4", "#2ca25f", "#006d2c"]),
-                7 => {
-                    Some(vec!["#edf8fb", "#ccece6", "#99d8c9", "#66c2a4", "#41ae76", "#238b45",
-                              "#005824"])
-                }
-                8 => {
-                    Some(vec!["#f7fcfd", "#e5f5f9", "#ccece6", "#99d8c9", "#66c2a4", "#41ae76",
-                              "#238b45", "#005824"])
-                }
-                9 => {
-                    Some(vec!["#f7fcfd", "#e5f5f9", "#ccece6", "#99d8c9", "#66c2a4", "#41ae76",
-                              "#238b45", "#006d2c", "#00441b"])
-                }
-                _ => None,
-            }
-        }
-        Palette::PuBuGn => {
-            match nb_value {
-                3 => Some(vec!["#ece2f0", "#a6bddb", "#1c9099"]),
-                4 => Some(vec!["#f6eff7", "#bdc9e1", "#67a9cf", "#02818a"]),
-                5 => Some(vec!["#f6eff7", "#bdc9e1", "#67a9cf", "#1c9099", "#016c59"]),
-                6 => Some(vec!["#f6eff7", "#d0d1e6", "#a6bddb", "#67a9cf", "#1c9099", "#016c59"]),
-                7 => {
-                    Some(vec!["#f6eff7", "#d0d1e6", "#a6bddb", "#67a9cf", "#3690c0", "#02818a",
-                              "#016450"])
-                }
-                8 => {
-                    Some(vec!["#fff7fb", "#ece2f0", "#d0d1e6", "#a6bddb", "#67a9cf", "#3690c0",
-                              "#02818a", "#016450"])
-                }
-                9 => {
-                    Some(vec!["#fff7fb", "#ece2f0", "#d0d1e6", "#a6bddb", "#67a9cf", "#3690c0",
-                              "#02818a", "#016c59", "#014636"])
-                }
-                _ => None,
-            }
-        }
-        Palette::PuBu => {
-            match nb_value {
-                3 => Some(vec!["#ece7f2", "#a6bddb", "#2b8cbe"]),
-                4 => Some(vec!["#f1eef6", "#bdc9e1", "#74a9cf", "#0570b0"]),
-                5 => Some(vec!["#f1eef6", "#bdc9e1", "#74a9cf", "#2b8cbe", "#045a8d"]),
-                6 => Some(vec!["#f1eef6", "#d0d1e6", "#a6bddb", "#74a9cf", "#2b8cbe", "#045a8d"]),
-                7 => {
-                    Some(vec!["#f1eef6", "#d0d1e6", "#a6bddb", "#74a9cf", "#3690c0", "#0570b0",
-                              "#034e7b"])
-                }
-                8 => {
-                    Some(vec!["#fff7fb", "#ece7f2", "#d0d1e6", "#a6bddb", "#74a9cf", "#3690c0",
-                              "#0570b0", "#034e7b"])
-                }
-                9 => {
-                    Some(vec!["#fff7fb", "#ece7f2", "#d0d1e6", "#a6bddb", "#74a9cf", "#3690c0",
-                              "#0570b0", "#045a8d", "#023858"])
-                }
-                _ => None,
-            }
-        }
-        Palette::BuPu => {
-            match nb_value {
-                3 => Some(vec!["#e0ecf4", "#9ebcda", "#8856a7"]),
-                4 => Some(vec!["#edf8fb", "#b3cde3", "#8c96c6", "#88419d"]),
-                5 => Some(vec!["#edf8fb", "#b3cde3", "#8c96c6", "#8856a7", "#810f7c"]),
-                6 => Some(vec!["#edf8fb", "#bfd3e6", "#9ebcda", "#8c96c6", "#8856a7", "#810f7c"]),
-                7 => {
-                    Some(vec!["#edf8fb", "#bfd3e6", "#9ebcda", "#8c96c6", "#8c6bb1", "#88419d",
-                              "#6e016b"])
-                }
-                8 => {
-                    Some(vec!["#f7fcfd", "#e0ecf4", "#bfd3e6", "#9ebcda", "#8c96c6", "#8c6bb1",
-                              "#88419d", "#6e016b"])
-                }
-                9 => {
-                    Some(vec!["#f7fcfd", "#e0ecf4", "#bfd3e6", "#9ebcda", "#8c96c6", "#8c6bb1",
-                              "#88419d", "#810f7c", "#4d004b"])
-                }
-                _ => None,
-            }
-        }
-        Palette::RdPu => {
-            match nb_value {
-                3 => Some(vec!["#fde0dd", "#fa9fb5", "#c51b8a"]),
-                4 => Some(vec!["#feebe2", "#fbb4b9", "#f768a1", "#ae017e"]),
-                5 => Some(vec!["#feebe2", "#fbb4b9", "#f768a1", "#c51b8a", "#7a0177"]),
-                6 => Some(vec!["#feebe2", "#fcc5c0", "#fa9fb5", "#f768a1", "#c51b8a", "#7a0177"]),
-                7 => {
-                    Some(vec!["#feebe2", "#fcc5c0", "#fa9fb5", "#f768a1", "#dd3497", "#ae017e",
-                              "#7a0177"])
-                }
-                8 => {
-                    Some(vec!["#fff7f3", "#fde0dd", "#fcc5c0", "#fa9fb5", "#f768a1", "#dd3497",
-                              "#ae017e", "#7a0177"])
-                }
-                9 => {
-                    Some(vec!["#fff7f3", "#fde0dd", "#fcc5c0", "#fa9fb5", "#f768a1", "#dd3497",
-                              "#ae017e", "#7a0177", "#49006a"])
-                }
-                _ => None,
-            }
-        }
-        Palette::PuRd => {
-            match nb_value {
-                3 => Some(vec!["#e7e1ef", "#c994c7", "#dd1c77"]),
-                4 => Some(vec!["#f1eef6", "#d7b5d8", "#df65b0", "#ce1256"]),
-                5 => Some(vec!["#f1eef6", "#d7b5d8", "#df65b0", "#dd1c77", "#980043"]),
-                6 => Some(vec!["#f1eef6", "#d4b9da", "#c994c7", "#df65b0", "#dd1c77", "#980043"]),
-                7 => {
-                    Some(vec!["#f1eef6", "#d4b9da", "#c994c7", "#df65b0", "#e7298a", "#ce1256",
-                              "#91003f"])
-                }
-                8 => {
-                    Some(vec!["#f7f4f9", "#e7e1ef", "#d4b9da", "#c994c7", "#df65b0", "#e7298a",
-                              "#ce1256", "#91003f"])
-                }
-                9 => {
-                    Some(vec!["#f7f4f9", "#e7e1ef", "#d4b9da", "#c994c7", "#df65b0", "#e7298a",
-                              "#ce1256", "#980043", "#67001f"])
-                }
-                _ => None,
-            }
-        }
-        Palette::OrRd => {
-            match nb_value {
-                3 => Some(vec!["#fee8c8", "#fdbb84", "#e34a33"]),
-                4 => Some(vec!["#fef0d9", "#fdcc8a", "#fc8d59", "#d7301f"]),
-                5 => Some(vec!["#fef0d9", "#fdcc8a", "#fc8d59", "#e34a33", "#b30000"]),
-                6 => Some(vec!["#fef0d9", "#fdd49e", "#fdbb84", "#fc8d59", "#e34a33", "#b30000"]),
-                7 => {
-                    Some(vec!["#fef0d9", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548", "#d7301f",
-                              "#990000"])
-                }
-                8 => {
-                    Some(vec!["#fff7ec", "#fee8c8", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548",
-                              "#d7301f", "#990000"])
-                }
-                9 => {
-                    Some(vec!["#fff7ec", "#fee8c8", "#fdd49e", "#fdbb84", "#fc8d59", "#ef6548",
-                              "#d7301f", "#b30000", "#7f0000"])
-                }
-                _ => None,
-            }
-        }
-        Palette::YlOrRd => {
-            match nb_value {
-                3 => Some(vec!["#ffeda0", "#feb24c", "#f03b20"]),
-                4 => Some(vec!["#ffffb2", "#fecc5c", "#fd8d3c", "#e31a1c"]),
-                5 => Some(vec!["#ffffb2", "#fecc5c", "#fd8d3c", "#f03b20", "#bd0026"]),
-                6 => Some(vec!["#ffffb2", "#fed976", "#feb24c", "#fd8d3c", "#f03b20", "#bd0026"]),
-                7 => {
-                    Some(vec!["#ffffb2", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a", "#e31a1c",
-                              "#b10026"])
-                }
-                8 => {
-                    Some(vec!["#ffffcc", "#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a",
-                              "#e31a1c", "#b10026"])
-                }
-                9 => {
-                    Some(vec!["#ffffcc", "#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a",
-                              "#e31a1c", "#bd0026", "#800026"])
-                }
-                _ => None,
-            }
-        }
-        Palette::YlOrBr => {
-            match nb_value {
-                3 => Some(vec!["#fff7bc", "#fec44f", "#d95f0e"]),
-                4 => Some(vec!["#ffffd4", "#fed98e", "#fe9929", "#cc4c02"]),
-                5 => Some(vec!["#ffffd4", "#fed98e", "#fe9929", "#d95f0e", "#993404"]),
-                6 => Some(vec!["#ffffd4", "#fee391", "#fec44f", "#fe9929", "#d95f0e", "#993404"]),
-                7 => {
-                    Some(vec!["#ffffd4", "#fee391", "#fec44f", "#fe9929", "#ec7014", "#cc4c02",
-                              "#8c2d04"])
-                }
-                8 => {
-                    Some(vec!["#ffffe5", "#fff7bc", "#fee391", "#fec44f", "#fe9929", "#ec7014",
-                              "#cc4c02", "#8c2d04"])
-                }
-                9 => {
-                    Some(vec!["#ffffe5", "#fff7bc", "#fee391", "#fec44f", "#fe9929", "#ec7014",
-                              "#cc4c02", "#993404", "#662506"])
-                }
-                _ => None,
-            }
-        }
-        Palette::Purples => {
-            match nb_value {
-                3 => Some(vec!["#efedf5", "#bcbddc", "#756bb1"]),
-                4 => Some(vec!["#f2f0f7", "#cbc9e2", "#9e9ac8", "#6a51a3"]),
-                5 => Some(vec!["#f2f0f7", "#cbc9e2", "#9e9ac8", "#756bb1", "#54278f"]),
-                6 => Some(vec!["#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#756bb1", "#54278f"]),
-                7 => {
-                    Some(vec!["#f2f0f7", "#dadaeb", "#bcbddc", "#9e9ac8", "#807dba", "#6a51a3",
-                              "#4a1486"])
-                }
-                8 => {
-                    Some(vec!["#fcfbfd", "#efedf5", "#dadaeb", "#bcbddc", "#9e9ac8", "#807dba",
-                              "#6a51a3", "#4a1486"])
-                }
-                9 => {
-                    Some(vec!["#fcfbfd", "#efedf5", "#dadaeb", "#bcbddc", "#9e9ac8", "#807dba",
-                              "#6a51a3", "#54278f", "#3f007d"])
-                }
-                _ => None,
-            }
-        }
-        Palette::Blues => {
-            match nb_value {
-                3 => Some(vec!["#deebf7", "#9ecae1", "#3182bd"]),
-                4 => Some(vec!["#eff3ff", "#bdd7e7", "#6baed6", "#2171b5"]),
-                5 => Some(vec!["#eff3ff", "#bdd7e7", "#6baed6", "#3182bd", "#08519c"]),
-                6 => Some(vec!["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#3182bd", "#08519c"]),
-                7 => {
-                    Some(vec!["#eff3ff", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5",
-                              "#084594"])
-                }
-                8 => {
-                    Some(vec!["#f7fbff", "#deebf7", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6",
-                              "#2171b5", "#084594"])
-                }
-                9 => {
-                    Some(vec!["#f7fbff", "#deebf7", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6",
-                              "#2171b5", "#08519c", "#08306b"])
-                }
-                _ => None,
-            }
-        }
-        Palette::Greens => {
-            match nb_value {
-                3 => Some(vec!["#e5f5e0", "#a1d99b", "#31a354"]),
-                4 => Some(vec!["#edf8e9", "#bae4b3", "#74c476", "#238b45"]),
-                5 => Some(vec!["#edf8e9", "#bae4b3", "#74c476", "#31a354", "#006d2c"]),
-                6 => Some(vec!["#edf8e9", "#c7e9c0", "#a1d99b", "#74c476", "#31a354", "#006d2c"]),
-                7 => {
-                    Some(vec!["#edf8e9", "#c7e9c0", "#a1d99b", "#74c476", "#41ab5d", "#238b45",
-                              "#005a32"])
-                }
-                8 => {
-                    Some(vec!["#f7fcf5", "#e5f5e0", "#c7e9c0", "#a1d99b", "#74c476", "#41ab5d",
-                              "#238b45", "#005a32"])
-                }
-                9 => {
-                    Some(vec!["#f7fcf5", "#e5f5e0", "#c7e9c0", "#a1d99b", "#74c476", "#41ab5d",
-                              "#238b45", "#006d2c", "#00441b"])
-                }
-                _ => None,
-            }
-        }
-        Palette::Oranges => {
-            match nb_value {
-                3 => Some(vec!["#fee6ce", "#fdae6b", "#e6550d"]),
-                4 => Some(vec!["#feedde", "#fdbe85", "#fd8d3c", "#d94701"]),
-                5 => Some(vec!["#feedde", "#fdbe85", "#fd8d3c", "#e6550d", "#a63603"]),
-                6 => Some(vec!["#feedde", "#fdd0a2", "#fdae6b", "#fd8d3c", "#e6550d", "#a63603"]),
-                7 => {
-                    Some(vec!["#feedde", "#fdd0a2", "#fdae6b", "#fd8d3c", "#f16913", "#d94801",
-                              "#8c2d04"])
-                }
-                8 => {
-                    Some(vec!["#fff5eb", "#fee6ce", "#fdd0a2", "#fdae6b", "#fd8d3c", "#f16913",
-                              "#d94801", "#8c2d04"])
-                }
-                9 => {
-                    Some(vec!["#fff5eb", "#fee6ce", "#fdd0a2", "#fdae6b", "#fd8d3c", "#f16913",
-                              "#d94801", "#a63603", "#7f2704"])
-                }
-                _ => None,
-            }
-        }
-        Palette::Reds => {
-            match nb_value {
-                3 => Some(vec!["#fee0d2", "#fc9272", "#de2d26"]),
-                4 => Some(vec!["#fee5d9", "#fcae91", "#fb6a4a", "#cb181d"]),
-                5 => Some(vec!["#fee5d9", "#fcae91", "#fb6a4a", "#de2d26", "#a50f15"]),
-                6 => Some(vec!["#fee5d9", "#fcbba1", "#fc9272", "#fb6a4a", "#de2d26", "#a50f15"]),
-                7 => {
-                    Some(vec!["#fee5d9", "#fcbba1", "#fc9272", "#fb6a4a", "#ef3b2c", "#cb181d",
-                              "#99000d"])
-                }
-                8 => {
-                    Some(vec!["#fff5f0", "#fee0d2", "#fcbba1", "#fc9272", "#fb6a4a", "#ef3b2c",
-                              "#cb181d", "#99000d"])
-                }
-                9 => {
-                    Some(vec!["#fff5f0", "#fee0d2", "#fcbba1", "#fc9272", "#fb6a4a", "#ef3b2c",
-                              "#cb181d", "#a50f15", "#67000d"])
-                }
-                _ => None,
-            }
-        }
-        Palette::Greys => {
-            match nb_value {
-                3 => Some(vec!["#f0f0f0", "#bdbdbd", "#636363"]),
-                4 => Some(vec!["#f7f7f7", "#cccccc", "#969696", "#525252"]),
-                5 => Some(vec!["#f7f7f7", "#cccccc", "#969696", "#636363", "#252525"]),
-                6 => Some(vec!["#f7f7f7", "#d9d9d9", "#bdbdbd", "#969696", "#636363", "#252525"]),
-                7 => {
-                    Some(vec!["#f7f7f7", "#d9d9d9", "#bdbdbd", "#969696", "#737373", "#525252",
-                              "#252525"])
-                }
-                8 => {
-                    Some(vec!["#ffffff", "#f0f0f0", "#d9d9d9", "#bdbdbd", "#969696", "#737373",
-                              "#525252", "#252525"])
-                }
-                9 => {
-                    Some(vec!["#ffffff", "#f0f0f0", "#d9d9d9", "#bdbdbd", "#969696", "#737373",
-                              "#525252", "#252525", "#000000"])
-                }
-                _ => None,
-            }
-        }
-        Palette::PuOr => {
-            match nb_value {
-                3 => Some(vec!["#f1a340", "#f7f7f7", "#998ec3"]),
-                4 => Some(vec!["#e66101", "#fdb863", "#b2abd2", "#5e3c99"]),
-                5 => Some(vec!["#e66101", "#fdb863", "#f7f7f7", "#b2abd2", "#5e3c99"]),
-                6 => Some(vec!["#b35806", "#f1a340", "#fee0b6", "#d8daeb", "#998ec3", "#542788"]),
-                7 => {
-                    Some(vec!["#b35806", "#f1a340", "#fee0b6", "#f7f7f7", "#d8daeb", "#998ec3",
-                              "#542788"])
-                }
-                8 => {
-                    Some(vec!["#b35806", "#e08214", "#fdb863", "#fee0b6", "#d8daeb", "#b2abd2",
-                              "#8073ac", "#542788"])
-                }
-                9 => {
-                    Some(vec!["#b35806", "#e08214", "#fdb863", "#fee0b6", "#f7f7f7", "#d8daeb",
-                              "#b2abd2", "#8073ac", "#542788"])
-                }
-                10 => {
-                    Some(vec!["#7f3b08", "#b35806", "#e08214", "#fdb863", "#fee0b6", "#d8daeb",
-                              "#b2abd2", "#8073ac", "#542788", "#2d004b"])
-                }
-                11 => {
-                    Some(vec!["#7f3b08", "#b35806", "#e08214", "#fdb863", "#fee0b6", "#f7f7f7",
-                              "#d8daeb", "#b2abd2", "#8073ac", "#542788", "#2d004b"])
-                }
-                _ => None,
-            }
-        }
-        Palette::BrBG => {
-            match nb_value {
-                3 => Some(vec!["#d8b365", "#f5f5f5", "#5ab4ac"]),
-                4 => Some(vec!["#a6611a", "#dfc27d", "#80cdc1", "#018571"]),
-                5 => Some(vec!["#a6611a", "#dfc27d", "#f5f5f5", "#80cdc1", "#018571"]),
-                6 => Some(vec!["#8c510a", "#d8b365", "#f6e8c3", "#c7eae5", "#5ab4ac", "#01665e"]),
-                7 => {
-                    Some(vec!["#8c510a", "#d8b365", "#f6e8c3", "#f5f5f5", "#c7eae5", "#5ab4ac",
-                              "#01665e"])
-                }
-                8 => {
-                    Some(vec!["#8c510a", "#bf812d", "#dfc27d", "#f6e8c3", "#c7eae5", "#80cdc1",
-                              "#35978f", "#01665e"])
-                }
-                9 => {
-                    Some(vec!["#8c510a", "#bf812d", "#dfc27d", "#f6e8c3", "#f5f5f5", "#c7eae5",
-                              "#80cdc1", "#35978f", "#01665e"])
-                }
-                10 => {
-                    Some(vec!["#543005", "#8c510a", "#bf812d", "#dfc27d", "#f6e8c3", "#c7eae5",
-                              "#80cdc1", "#35978f", "#01665e", "#003c30"])
-                }
-                11 => {
-                    Some(vec!["#543005", "#8c510a", "#bf812d", "#dfc27d", "#f6e8c3", "#f5f5f5",
-                              "#c7eae5", "#80cdc1", "#35978f", "#01665e", "#003c30"])
-                }
-                _ => None,
-            }
-        }
-        Palette::PRGn => {
-            match nb_value {
-                3 => Some(vec!["#af8dc3", "#f7f7f7", "#7fbf7b"]),
-                4 => Some(vec!["#7b3294", "#c2a5cf", "#a6dba0", "#008837"]),
-                5 => Some(vec!["#7b3294", "#c2a5cf", "#f7f7f7", "#a6dba0", "#008837"]),
-                6 => Some(vec!["#762a83", "#af8dc3", "#e7d4e8", "#d9f0d3", "#7fbf7b", "#1b7837"]),
-                7 => {
-                    Some(vec!["#762a83", "#af8dc3", "#e7d4e8", "#f7f7f7", "#d9f0d3", "#7fbf7b",
-                              "#1b7837"])
-                }
-                8 => {
-                    Some(vec!["#762a83", "#9970ab", "#c2a5cf", "#e7d4e8", "#d9f0d3", "#a6dba0",
-                              "#5aae61", "#1b7837"])
-                }
-                9 => {
-                    Some(vec!["#762a83", "#9970ab", "#c2a5cf", "#e7d4e8", "#f7f7f7", "#d9f0d3",
-                              "#a6dba0", "#5aae61", "#1b7837"])
-                }
-                10 => {
-                    Some(vec!["#40004b", "#762a83", "#9970ab", "#c2a5cf", "#e7d4e8", "#d9f0d3",
-                              "#a6dba0", "#5aae61", "#1b7837", "#00441b"])
-                }
-                11 => {
-                    Some(vec!["#40004b", "#762a83", "#9970ab", "#c2a5cf", "#e7d4e8", "#f7f7f7",
-                              "#d9f0d3", "#a6dba0", "#5aae61", "#1b7837", "#00441b"])
-                }
-                _ => None,
-            }
-        }
-        Palette::PiYG => {
-            match nb_value {
-                3 => Some(vec!["#e9a3c9", "#f7f7f7", "#a1d76a"]),
-                4 => Some(vec!["#d01c8b", "#f1b6da", "#b8e186", "#4dac26"]),
-                5 => Some(vec!["#d01c8b", "#f1b6da", "#f7f7f7", "#b8e186", "#4dac26"]),
-                6 => Some(vec!["#c51b7d", "#e9a3c9", "#fde0ef", "#e6f5d0", "#a1d76a", "#4d9221"]),
-                7 => {
-                    Some(vec!["#c51b7d", "#e9a3c9", "#fde0ef", "#f7f7f7", "#e6f5d0", "#a1d76a",
-                              "#4d9221"])
-                }
-                8 => {
-                    Some(vec!["#c51b7d", "#de77ae", "#f1b6da", "#fde0ef", "#e6f5d0", "#b8e186",
-                              "#7fbc41", "#4d9221"])
-                }
-                9 => {
-                    Some(vec!["#c51b7d", "#de77ae", "#f1b6da", "#fde0ef", "#f7f7f7", "#e6f5d0",
-                              "#b8e186", "#7fbc41", "#4d9221"])
-                }
-                10 => {
-                    Some(vec!["#8e0152", "#c51b7d", "#de77ae", "#f1b6da", "#fde0ef", "#e6f5d0",
-                              "#b8e186", "#7fbc41", "#4d9221", "#276419"])
-                }
-                11 => {
-                    Some(vec!["#8e0152", "#c51b7d", "#de77ae", "#f1b6da", "#fde0ef", "#f7f7f7",
-                              "#e6f5d0", "#b8e186", "#7fbc41", "#4d9221", "#276419"])
-                }
-                _ => None,
-            }
-        }
-        Palette::RdBu => {
-            match nb_value {
-                3 => Some(vec!["#ef8a62", "#f7f7f7", "#67a9cf"]),
-                4 => Some(vec!["#ca0020", "#f4a582", "#92c5de", "#0571b0"]),
-                5 => Some(vec!["#ca0020", "#f4a582", "#f7f7f7", "#92c5de", "#0571b0"]),
-                6 => Some(vec!["#b2182b", "#ef8a62", "#fddbc7", "#d1e5f0", "#67a9cf", "#2166ac"]),
-                7 => {
-                    Some(vec!["#b2182b", "#ef8a62", "#fddbc7", "#f7f7f7", "#d1e5f0", "#67a9cf",
-                              "#2166ac"])
-                }
-                8 => {
-                    Some(vec!["#b2182b", "#d6604d", "#f4a582", "#fddbc7", "#d1e5f0", "#92c5de",
-                              "#4393c3", "#2166ac"])
-                }
-                9 => {
-                    Some(vec!["#b2182b", "#d6604d", "#f4a582", "#fddbc7", "#f7f7f7", "#d1e5f0",
-                              "#92c5de", "#4393c3", "#2166ac"])
-                }
-                10 => {
-                    Some(vec!["#67001f", "#b2182b", "#d6604d", "#f4a582", "#fddbc7", "#d1e5f0",
-                              "#92c5de", "#4393c3", "#2166ac", "#053061"])
-                }
-                11 => {
-                    Some(vec!["#67001f", "#b2182b", "#d6604d", "#f4a582", "#fddbc7", "#f7f7f7",
-                              "#d1e5f0", "#92c5de", "#4393c3", "#2166ac", "#053061"])
-                }
-                _ => None,
-            }
-        }
-        Palette::RdGy => {
-            match nb_value {
-                3 => Some(vec!["#ef8a62", "#ffffff", "#999999"]),
-                4 => Some(vec!["#ca0020", "#f4a582", "#bababa", "#404040"]),
-                5 => Some(vec!["#ca0020", "#f4a582", "#ffffff", "#bababa", "#404040"]),
-                6 => Some(vec!["#b2182b", "#ef8a62", "#fddbc7", "#e0e0e0", "#999999", "#4d4d4d"]),
-                7 => {
-                    Some(vec!["#b2182b", "#ef8a62", "#fddbc7", "#ffffff", "#e0e0e0", "#999999",
-                              "#4d4d4d"])
-                }
-                8 => {
-                    Some(vec!["#b2182b", "#d6604d", "#f4a582", "#fddbc7", "#e0e0e0", "#bababa",
-                              "#878787", "#4d4d4d"])
-                }
-                9 => {
-                    Some(vec!["#b2182b", "#d6604d", "#f4a582", "#fddbc7", "#ffffff", "#e0e0e0",
-                              "#bababa", "#878787", "#4d4d4d"])
-                }
-                10 => {
-                    Some(vec!["#67001f", "#b2182b", "#d6604d", "#f4a582", "#fddbc7", "#e0e0e0",
-                              "#bababa", "#878787", "#4d4d4d", "#1a1a1a"])
-                }
-                11 => {
-                    Some(vec!["#67001f", "#b2182b", "#d6604d", "#f4a582", "#fddbc7", "#ffffff",
-                              "#e0e0e0", "#bababa", "#878787", "#4d4d4d", "#1a1a1a"])
-                }
-                _ => None,
-            }
-        }
-        Palette::RdYlBu => {
-            match nb_value {
-                3 => Some(vec!["#fc8d59", "#ffffbf", "#91bfdb"]),
-                4 => Some(vec!["#d7191c", "#fdae61", "#abd9e9", "#2c7bb6"]),
-                5 => Some(vec!["#d7191c", "#fdae61", "#ffffbf", "#abd9e9", "#2c7bb6"]),
-                6 => Some(vec!["#d73027", "#fc8d59", "#fee090", "#e0f3f8", "#91bfdb", "#4575b4"]),
-                7 => {
-                    Some(vec!["#d73027", "#fc8d59", "#fee090", "#ffffbf", "#e0f3f8", "#91bfdb",
-                              "#4575b4"])
-                }
-                8 => {
-                    Some(vec!["#d73027", "#f46d43", "#fdae61", "#fee090", "#e0f3f8", "#abd9e9",
-                              "#74add1", "#4575b4"])
-                }
-                9 => {
-                    Some(vec!["#d73027", "#f46d43", "#fdae61", "#fee090", "#ffffbf", "#e0f3f8",
-                              "#abd9e9", "#74add1", "#4575b4"])
-                }
-                10 => {
-                    Some(vec!["#a50026", "#d73027", "#f46d43", "#fdae61", "#fee090", "#e0f3f8",
-                              "#abd9e9", "#74add1", "#4575b4", "#313695"])
-                }
-                11 => {
-                    Some(vec!["#a50026", "#d73027", "#f46d43", "#fdae61", "#fee090", "#ffffbf",
-                              "#e0f3f8", "#abd9e9", "#74add1", "#4575b4", "#313695"])
-                }
-                _ => None,
-            }
-        }
-        Palette::Spectral => {
-            match nb_value {
-                3 => Some(vec!["#fc8d59", "#ffffbf", "#99d594"]),
-                4 => Some(vec!["#d7191c", "#fdae61", "#abdda4", "#2b83ba"]),
-                5 => Some(vec!["#d7191c", "#fdae61", "#ffffbf", "#abdda4", "#2b83ba"]),
-                6 => Some(vec!["#d53e4f", "#fc8d59", "#fee08b", "#e6f598", "#99d594", "#3288bd"]),
-                7 => {
-                    Some(vec!["#d53e4f", "#fc8d59", "#fee08b", "#ffffbf", "#e6f598", "#99d594",
-                              "#3288bd"])
-                }
-                8 => {
-                    Some(vec!["#d53e4f", "#f46d43", "#fdae61", "#fee08b", "#e6f598", "#abdda4",
-                              "#66c2a5", "#3288bd"])
-                }
-                9 => {
-                    Some(vec!["#d53e4f", "#f46d43", "#fdae61", "#fee08b", "#ffffbf", "#e6f598",
-                              "#abdda4", "#66c2a5", "#3288bd"])
-                }
-                10 => {
-                    Some(vec!["#9e0142", "#d53e4f", "#f46d43", "#fdae61", "#fee08b", "#e6f598",
-                              "#abdda4", "#66c2a5", "#3288bd", "#5e4fa2"])
-                }
-                11 => {
-                    Some(vec!["#9e0142", "#d53e4f", "#f46d43", "#fdae61", "#fee08b", "#ffffbf",
-                              "#e6f598", "#abdda4", "#66c2a5", "#3288bd", "#5e4fa2"])
-                }
-                _ => None,
-            }
-        }
-        Palette::RdYlGn => {
-            match nb_value {
-                3 => Some(vec!["#fc8d59", "#ffffbf", "#91cf60"]),
-                4 => Some(vec!["#d7191c", "#fdae61", "#a6d96a", "#1a9641"]),
-                5 => Some(vec!["#d7191c", "#fdae61", "#ffffbf", "#a6d96a", "#1a9641"]),
-                6 => Some(vec!["#d73027", "#fc8d59", "#fee08b", "#d9ef8b", "#91cf60", "#1a9850"]),
-                7 => {
-                    Some(vec!["#d73027", "#fc8d59", "#fee08b", "#ffffbf", "#d9ef8b", "#91cf60",
-                              "#1a9850"])
-                }
-                8 => {
-                    Some(vec!["#d73027", "#f46d43", "#fdae61", "#fee08b", "#d9ef8b", "#a6d96a",
-                              "#66bd63", "#1a9850"])
-                }
-                9 => {
-                    Some(vec!["#d73027", "#f46d43", "#fdae61", "#fee08b", "#ffffbf", "#d9ef8b",
-                              "#a6d96a", "#66bd63", "#1a9850"])
-                }
-                10 => {
-                    Some(vec!["#a50026", "#d73027", "#f46d43", "#fdae61", "#fee08b", "#d9ef8b",
-                              "#a6d96a", "#66bd63", "#1a9850", "#006837"])
-                }
-                11 => {
-                    Some(vec!["#a50026", "#d73027", "#f46d43", "#fdae61", "#fee08b", "#ffffbf",
-                              "#d9ef8b", "#a6d96a", "#66bd63", "#1a9850", "#006837"])
-                }
-                _ => None,
-            }
-        }
-        Palette::Accent => {
-            match nb_value {
-                3 => Some(vec!["#7fc97f", "#beaed4", "#fdc086"]),
-                4 => Some(vec!["#7fc97f", "#beaed4", "#fdc086", "#ffff99"]),
-                5 => Some(vec!["#7fc97f", "#beaed4", "#fdc086", "#ffff99", "#386cb0"]),
-                6 => Some(vec!["#7fc97f", "#beaed4", "#fdc086", "#ffff99", "#386cb0", "#f0027f"]),
-                7 => {
-                    Some(vec!["#7fc97f", "#beaed4", "#fdc086", "#ffff99", "#386cb0", "#f0027f",
-                              "#bf5b17"])
-                }
-                8 => {
-                    Some(vec!["#7fc97f", "#beaed4", "#fdc086", "#ffff99", "#386cb0", "#f0027f",
-                              "#bf5b17", "#666666"])
-                }
-                _ => None,
-            }
-        }
-        Palette::Dark2 => {
-            match nb_value {
-                3 => Some(vec!["#1b9e77", "#d95f02", "#7570b3"]),
-                4 => Some(vec!["#1b9e77", "#d95f02", "#7570b3", "#e7298a"]),
-                5 => Some(vec!["#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e"]),
-                6 => Some(vec!["#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02"]),
-                7 => {
-                    Some(vec!["#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02",
-                              "#a6761d"])
-                }
-                8 => {
-                    Some(vec!["#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02",
-                              "#a6761d", "#666666"])
-                }
-                _ => None,
-            }
-        }
-        Palette::Paired => {
-            match nb_value {
-                3 => Some(vec!["#a6cee3", "#1f78b4", "#b2df8a"]),
-                4 => Some(vec!["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c"]),
-                5 => Some(vec!["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99"]),
-                6 => Some(vec!["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c"]),
-                7 => {
-                    Some(vec!["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c",
-                              "#fdbf6f"])
-                }
-                8 => {
-                    Some(vec!["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c",
-                              "#fdbf6f", "#ff7f00"])
-                }
-                9 => {
-                    Some(vec!["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c",
-                              "#fdbf6f", "#ff7f00", "#cab2d6"])
-                }
-                10 => {
-                    Some(vec!["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c",
-                              "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a"])
-                }
-                11 => {
-                    Some(vec!["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c",
-                              "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99"])
-                }
-                12 => {
-                    Some(vec!["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", "#e31a1c",
-                              "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a", "#ffff99", "#b15928"])
-                }
-                _ => None,
-            }
-        }
-        Palette::Pastel1 => {
-            match nb_value {
-                3 => Some(vec!["#fbb4ae", "#b3cde3", "#ccebc5"]),
-                4 => Some(vec!["#fbb4ae", "#b3cde3", "#ccebc5", "#decbe4"]),
-                5 => Some(vec!["#fbb4ae", "#b3cde3", "#ccebc5", "#decbe4", "#fed9a6"]),
-                6 => Some(vec!["#fbb4ae", "#b3cde3", "#ccebc5", "#decbe4", "#fed9a6", "#ffffcc"]),
-                7 => {
-                    Some(vec!["#fbb4ae", "#b3cde3", "#ccebc5", "#decbe4", "#fed9a6", "#ffffcc",
-                              "#e5d8bd"])
-                }
-                8 => {
-                    Some(vec!["#fbb4ae", "#b3cde3", "#ccebc5", "#decbe4", "#fed9a6", "#ffffcc",
-                              "#e5d8bd", "#fddaec"])
-                }
-                9 => {
-                    Some(vec!["#fbb4ae", "#b3cde3", "#ccebc5", "#decbe4", "#fed9a6", "#ffffcc",
-                              "#e5d8bd", "#fddaec", "#f2f2f2"])
-                }
-                _ => None,
-            }
-        }
-        Palette::Pastel2 => {
-            match nb_value {
-                3 => Some(vec!["#b3e2cd", "#fdcdac", "#cbd5e8"]),
-                4 => Some(vec!["#b3e2cd", "#fdcdac", "#cbd5e8", "#f4cae4"]),
-                5 => Some(vec!["#b3e2cd", "#fdcdac", "#cbd5e8", "#f4cae4", "#e6f5c9"]),
-                6 => Some(vec!["#b3e2cd", "#fdcdac", "#cbd5e8", "#f4cae4", "#e6f5c9", "#fff2ae"]),
-                7 => {
-                    Some(vec!["#b3e2cd", "#fdcdac", "#cbd5e8", "#f4cae4", "#e6f5c9", "#fff2ae",
-                              "#f1e2cc"])
-                }
-                8 => {
-                    Some(vec!["#b3e2cd", "#fdcdac", "#cbd5e8", "#f4cae4", "#e6f5c9", "#fff2ae",
-                              "#f1e2cc", "#cccccc"])
-                }
-                _ => None,
-            }
-        }
-        Palette::Set1 => {
-            match nb_value {
-                3 => Some(vec!["#e41a1c", "#377eb8", "#4daf4a"]),
-                4 => Some(vec!["#e41a1c", "#377eb8", "#4daf4a", "#984ea3"]),
-                5 => Some(vec!["#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00"]),
-                6 => Some(vec!["#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33"]),
-                7 => {
-                    Some(vec!["#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33",
-                              "#a65628"])
-                }
-                8 => {
-                    Some(vec!["#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33",
-                              "#a65628", "#f781bf"])
-                }
-                9 => {
-                    Some(vec!["#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33",
-                              "#a65628", "#f781bf", "#999999"])
-                }
-                _ => None,
-            }
-        }
-        Palette::Set2 => {
-            match nb_value {
-                3 => Some(vec!["#66c2a5", "#fc8d62", "#8da0cb"]),
-                4 => Some(vec!["#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3"]),
-                5 => Some(vec!["#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854"]),
-                6 => Some(vec!["#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854", "#ffd92f"]),
-                7 => {
-                    Some(vec!["#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854", "#ffd92f",
-                              "#e5c494"])
-                }
-                8 => {
-                    Some(vec!["#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854", "#ffd92f",
-                              "#e5c494", "#b3b3b3"])
-                }
-                _ => None,
-            }
-        }
-        Palette::Set3 => {
-            match nb_value {
-                3 => Some(vec!["#8dd3c7", "#ffffb3", "#bebada"]),
-                4 => Some(vec!["#8dd3c7", "#ffffb3", "#bebada", "#fb8072"]),
-                5 => Some(vec!["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3"]),
-                6 => Some(vec!["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462"]),
-                7 => {
-                    Some(vec!["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462",
-                              "#b3de69"])
-                }
-                8 => {
-                    Some(vec!["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462",
-                              "#b3de69", "#fccde5"])
-                }
-                9 => {
-                    Some(vec!["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462",
-                              "#b3de69", "#fccde5", "#d9d9d9"])
-                }
-                10 => {
-                    Some(vec!["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462",
-                              "#b3de69", "#fccde5", "#d9d9d9", "#bc80bd"])
-                }
-                11 => {
-                    Some(vec!["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462",
-                              "#b3de69", "#fccde5", "#d9d9d9", "#bc80bd", "#ccebc5"])
-                }
-                12 => {
-                    Some(vec!["#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", "#fdb462",
-                              "#b3de69", "#fccde5", "#d9d9d9", "#bc80bd", "#ccebc5", "#ffed6f"])
-                }
-                _ => None,
-            }
-        }
+        Palette::YlGn => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 247,
+                    g: 252,
+                    b: 185,
+                },
+                RGB {
+                    r: 173,
+                    g: 221,
+                    b: 142,
+                },
+                RGB {
+                    r: 49,
+                    g: 163,
+                    b: 84,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 204,
+                },
+                RGB {
+                    r: 194,
+                    g: 230,
+                    b: 153,
+                },
+                RGB {
+                    r: 120,
+                    g: 198,
+                    b: 121,
+                },
+                RGB {
+                    r: 35,
+                    g: 132,
+                    b: 67,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 204,
+                },
+                RGB {
+                    r: 194,
+                    g: 230,
+                    b: 153,
+                },
+                RGB {
+                    r: 120,
+                    g: 198,
+                    b: 121,
+                },
+                RGB {
+                    r: 49,
+                    g: 163,
+                    b: 84,
+                },
+                RGB {
+                    r: 0,
+                    g: 104,
+                    b: 55,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 204,
+                },
+                RGB {
+                    r: 217,
+                    g: 240,
+                    b: 163,
+                },
+                RGB {
+                    r: 173,
+                    g: 221,
+                    b: 142,
+                },
+                RGB {
+                    r: 120,
+                    g: 198,
+                    b: 121,
+                },
+                RGB {
+                    r: 49,
+                    g: 163,
+                    b: 84,
+                },
+                RGB {
+                    r: 0,
+                    g: 104,
+                    b: 55,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 204,
+                },
+                RGB {
+                    r: 217,
+                    g: 240,
+                    b: 163,
+                },
+                RGB {
+                    r: 173,
+                    g: 221,
+                    b: 142,
+                },
+                RGB {
+                    r: 120,
+                    g: 198,
+                    b: 121,
+                },
+                RGB {
+                    r: 65,
+                    g: 171,
+                    b: 93,
+                },
+                RGB {
+                    r: 35,
+                    g: 132,
+                    b: 67,
+                },
+                RGB { r: 0, g: 90, b: 50 },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 229,
+                },
+                RGB {
+                    r: 247,
+                    g: 252,
+                    b: 185,
+                },
+                RGB {
+                    r: 217,
+                    g: 240,
+                    b: 163,
+                },
+                RGB {
+                    r: 173,
+                    g: 221,
+                    b: 142,
+                },
+                RGB {
+                    r: 120,
+                    g: 198,
+                    b: 121,
+                },
+                RGB {
+                    r: 65,
+                    g: 171,
+                    b: 93,
+                },
+                RGB {
+                    r: 35,
+                    g: 132,
+                    b: 67,
+                },
+                RGB { r: 0, g: 90, b: 50 },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 229,
+                },
+                RGB {
+                    r: 247,
+                    g: 252,
+                    b: 185,
+                },
+                RGB {
+                    r: 217,
+                    g: 240,
+                    b: 163,
+                },
+                RGB {
+                    r: 173,
+                    g: 221,
+                    b: 142,
+                },
+                RGB {
+                    r: 120,
+                    g: 198,
+                    b: 121,
+                },
+                RGB {
+                    r: 65,
+                    g: 171,
+                    b: 93,
+                },
+                RGB {
+                    r: 35,
+                    g: 132,
+                    b: 67,
+                },
+                RGB {
+                    r: 0,
+                    g: 104,
+                    b: 55,
+                },
+                RGB { r: 0, g: 69, b: 41 },
+            ]),
+            _ => None,
+        },
+        Palette::YlGnBu => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 237,
+                    g: 248,
+                    b: 177,
+                },
+                RGB {
+                    r: 127,
+                    g: 205,
+                    b: 187,
+                },
+                RGB {
+                    r: 44,
+                    g: 127,
+                    b: 184,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 204,
+                },
+                RGB {
+                    r: 161,
+                    g: 218,
+                    b: 180,
+                },
+                RGB {
+                    r: 65,
+                    g: 182,
+                    b: 196,
+                },
+                RGB {
+                    r: 34,
+                    g: 94,
+                    b: 168,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 204,
+                },
+                RGB {
+                    r: 161,
+                    g: 218,
+                    b: 180,
+                },
+                RGB {
+                    r: 65,
+                    g: 182,
+                    b: 196,
+                },
+                RGB {
+                    r: 44,
+                    g: 127,
+                    b: 184,
+                },
+                RGB {
+                    r: 37,
+                    g: 52,
+                    b: 148,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 204,
+                },
+                RGB {
+                    r: 199,
+                    g: 233,
+                    b: 180,
+                },
+                RGB {
+                    r: 127,
+                    g: 205,
+                    b: 187,
+                },
+                RGB {
+                    r: 65,
+                    g: 182,
+                    b: 196,
+                },
+                RGB {
+                    r: 44,
+                    g: 127,
+                    b: 184,
+                },
+                RGB {
+                    r: 37,
+                    g: 52,
+                    b: 148,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 204,
+                },
+                RGB {
+                    r: 199,
+                    g: 233,
+                    b: 180,
+                },
+                RGB {
+                    r: 127,
+                    g: 205,
+                    b: 187,
+                },
+                RGB {
+                    r: 65,
+                    g: 182,
+                    b: 196,
+                },
+                RGB {
+                    r: 29,
+                    g: 145,
+                    b: 192,
+                },
+                RGB {
+                    r: 34,
+                    g: 94,
+                    b: 168,
+                },
+                RGB {
+                    r: 12,
+                    g: 44,
+                    b: 132,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 217,
+                },
+                RGB {
+                    r: 237,
+                    g: 248,
+                    b: 177,
+                },
+                RGB {
+                    r: 199,
+                    g: 233,
+                    b: 180,
+                },
+                RGB {
+                    r: 127,
+                    g: 205,
+                    b: 187,
+                },
+                RGB {
+                    r: 65,
+                    g: 182,
+                    b: 196,
+                },
+                RGB {
+                    r: 29,
+                    g: 145,
+                    b: 192,
+                },
+                RGB {
+                    r: 34,
+                    g: 94,
+                    b: 168,
+                },
+                RGB {
+                    r: 12,
+                    g: 44,
+                    b: 132,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 217,
+                },
+                RGB {
+                    r: 237,
+                    g: 248,
+                    b: 177,
+                },
+                RGB {
+                    r: 199,
+                    g: 233,
+                    b: 180,
+                },
+                RGB {
+                    r: 127,
+                    g: 205,
+                    b: 187,
+                },
+                RGB {
+                    r: 65,
+                    g: 182,
+                    b: 196,
+                },
+                RGB {
+                    r: 29,
+                    g: 145,
+                    b: 192,
+                },
+                RGB {
+                    r: 34,
+                    g: 94,
+                    b: 168,
+                },
+                RGB {
+                    r: 37,
+                    g: 52,
+                    b: 148,
+                },
+                RGB { r: 8, g: 29, b: 88 },
+            ]),
+            _ => None,
+        },
+        Palette::GnBu => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 224,
+                    g: 243,
+                    b: 219,
+                },
+                RGB {
+                    r: 168,
+                    g: 221,
+                    b: 181,
+                },
+                RGB {
+                    r: 67,
+                    g: 162,
+                    b: 202,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 240,
+                    g: 249,
+                    b: 232,
+                },
+                RGB {
+                    r: 186,
+                    g: 228,
+                    b: 188,
+                },
+                RGB {
+                    r: 123,
+                    g: 204,
+                    b: 196,
+                },
+                RGB {
+                    r: 43,
+                    g: 140,
+                    b: 190,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 240,
+                    g: 249,
+                    b: 232,
+                },
+                RGB {
+                    r: 186,
+                    g: 228,
+                    b: 188,
+                },
+                RGB {
+                    r: 123,
+                    g: 204,
+                    b: 196,
+                },
+                RGB {
+                    r: 67,
+                    g: 162,
+                    b: 202,
+                },
+                RGB {
+                    r: 8,
+                    g: 104,
+                    b: 172,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 240,
+                    g: 249,
+                    b: 232,
+                },
+                RGB {
+                    r: 204,
+                    g: 235,
+                    b: 197,
+                },
+                RGB {
+                    r: 168,
+                    g: 221,
+                    b: 181,
+                },
+                RGB {
+                    r: 123,
+                    g: 204,
+                    b: 196,
+                },
+                RGB {
+                    r: 67,
+                    g: 162,
+                    b: 202,
+                },
+                RGB {
+                    r: 8,
+                    g: 104,
+                    b: 172,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 240,
+                    g: 249,
+                    b: 232,
+                },
+                RGB {
+                    r: 204,
+                    g: 235,
+                    b: 197,
+                },
+                RGB {
+                    r: 168,
+                    g: 221,
+                    b: 181,
+                },
+                RGB {
+                    r: 123,
+                    g: 204,
+                    b: 196,
+                },
+                RGB {
+                    r: 78,
+                    g: 179,
+                    b: 211,
+                },
+                RGB {
+                    r: 43,
+                    g: 140,
+                    b: 190,
+                },
+                RGB {
+                    r: 8,
+                    g: 88,
+                    b: 158,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 247,
+                    g: 252,
+                    b: 240,
+                },
+                RGB {
+                    r: 224,
+                    g: 243,
+                    b: 219,
+                },
+                RGB {
+                    r: 204,
+                    g: 235,
+                    b: 197,
+                },
+                RGB {
+                    r: 168,
+                    g: 221,
+                    b: 181,
+                },
+                RGB {
+                    r: 123,
+                    g: 204,
+                    b: 196,
+                },
+                RGB {
+                    r: 78,
+                    g: 179,
+                    b: 211,
+                },
+                RGB {
+                    r: 43,
+                    g: 140,
+                    b: 190,
+                },
+                RGB {
+                    r: 8,
+                    g: 88,
+                    b: 158,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 247,
+                    g: 252,
+                    b: 240,
+                },
+                RGB {
+                    r: 224,
+                    g: 243,
+                    b: 219,
+                },
+                RGB {
+                    r: 204,
+                    g: 235,
+                    b: 197,
+                },
+                RGB {
+                    r: 168,
+                    g: 221,
+                    b: 181,
+                },
+                RGB {
+                    r: 123,
+                    g: 204,
+                    b: 196,
+                },
+                RGB {
+                    r: 78,
+                    g: 179,
+                    b: 211,
+                },
+                RGB {
+                    r: 43,
+                    g: 140,
+                    b: 190,
+                },
+                RGB {
+                    r: 8,
+                    g: 104,
+                    b: 172,
+                },
+                RGB {
+                    r: 8,
+                    g: 64,
+                    b: 129,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::BuGn => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 229,
+                    g: 245,
+                    b: 249,
+                },
+                RGB {
+                    r: 153,
+                    g: 216,
+                    b: 201,
+                },
+                RGB {
+                    r: 44,
+                    g: 162,
+                    b: 95,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 237,
+                    g: 248,
+                    b: 251,
+                },
+                RGB {
+                    r: 178,
+                    g: 226,
+                    b: 226,
+                },
+                RGB {
+                    r: 102,
+                    g: 194,
+                    b: 164,
+                },
+                RGB {
+                    r: 35,
+                    g: 139,
+                    b: 69,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 237,
+                    g: 248,
+                    b: 251,
+                },
+                RGB {
+                    r: 178,
+                    g: 226,
+                    b: 226,
+                },
+                RGB {
+                    r: 102,
+                    g: 194,
+                    b: 164,
+                },
+                RGB {
+                    r: 44,
+                    g: 162,
+                    b: 95,
+                },
+                RGB {
+                    r: 0,
+                    g: 109,
+                    b: 44,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 237,
+                    g: 248,
+                    b: 251,
+                },
+                RGB {
+                    r: 204,
+                    g: 236,
+                    b: 230,
+                },
+                RGB {
+                    r: 153,
+                    g: 216,
+                    b: 201,
+                },
+                RGB {
+                    r: 102,
+                    g: 194,
+                    b: 164,
+                },
+                RGB {
+                    r: 44,
+                    g: 162,
+                    b: 95,
+                },
+                RGB {
+                    r: 0,
+                    g: 109,
+                    b: 44,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 237,
+                    g: 248,
+                    b: 251,
+                },
+                RGB {
+                    r: 204,
+                    g: 236,
+                    b: 230,
+                },
+                RGB {
+                    r: 153,
+                    g: 216,
+                    b: 201,
+                },
+                RGB {
+                    r: 102,
+                    g: 194,
+                    b: 164,
+                },
+                RGB {
+                    r: 65,
+                    g: 174,
+                    b: 118,
+                },
+                RGB {
+                    r: 35,
+                    g: 139,
+                    b: 69,
+                },
+                RGB { r: 0, g: 88, b: 36 },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 247,
+                    g: 252,
+                    b: 253,
+                },
+                RGB {
+                    r: 229,
+                    g: 245,
+                    b: 249,
+                },
+                RGB {
+                    r: 204,
+                    g: 236,
+                    b: 230,
+                },
+                RGB {
+                    r: 153,
+                    g: 216,
+                    b: 201,
+                },
+                RGB {
+                    r: 102,
+                    g: 194,
+                    b: 164,
+                },
+                RGB {
+                    r: 65,
+                    g: 174,
+                    b: 118,
+                },
+                RGB {
+                    r: 35,
+                    g: 139,
+                    b: 69,
+                },
+                RGB { r: 0, g: 88, b: 36 },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 247,
+                    g: 252,
+                    b: 253,
+                },
+                RGB {
+                    r: 229,
+                    g: 245,
+                    b: 249,
+                },
+                RGB {
+                    r: 204,
+                    g: 236,
+                    b: 230,
+                },
+                RGB {
+                    r: 153,
+                    g: 216,
+                    b: 201,
+                },
+                RGB {
+                    r: 102,
+                    g: 194,
+                    b: 164,
+                },
+                RGB {
+                    r: 65,
+                    g: 174,
+                    b: 118,
+                },
+                RGB {
+                    r: 35,
+                    g: 139,
+                    b: 69,
+                },
+                RGB {
+                    r: 0,
+                    g: 109,
+                    b: 44,
+                },
+                RGB { r: 0, g: 68, b: 27 },
+            ]),
+            _ => None,
+        },
+        Palette::PuBuGn => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 236,
+                    g: 226,
+                    b: 240,
+                },
+                RGB {
+                    r: 166,
+                    g: 189,
+                    b: 219,
+                },
+                RGB {
+                    r: 28,
+                    g: 144,
+                    b: 153,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 246,
+                    g: 239,
+                    b: 247,
+                },
+                RGB {
+                    r: 189,
+                    g: 201,
+                    b: 225,
+                },
+                RGB {
+                    r: 103,
+                    g: 169,
+                    b: 207,
+                },
+                RGB {
+                    r: 2,
+                    g: 129,
+                    b: 138,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 246,
+                    g: 239,
+                    b: 247,
+                },
+                RGB {
+                    r: 189,
+                    g: 201,
+                    b: 225,
+                },
+                RGB {
+                    r: 103,
+                    g: 169,
+                    b: 207,
+                },
+                RGB {
+                    r: 28,
+                    g: 144,
+                    b: 153,
+                },
+                RGB {
+                    r: 1,
+                    g: 108,
+                    b: 89,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 246,
+                    g: 239,
+                    b: 247,
+                },
+                RGB {
+                    r: 208,
+                    g: 209,
+                    b: 230,
+                },
+                RGB {
+                    r: 166,
+                    g: 189,
+                    b: 219,
+                },
+                RGB {
+                    r: 103,
+                    g: 169,
+                    b: 207,
+                },
+                RGB {
+                    r: 28,
+                    g: 144,
+                    b: 153,
+                },
+                RGB {
+                    r: 1,
+                    g: 108,
+                    b: 89,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 246,
+                    g: 239,
+                    b: 247,
+                },
+                RGB {
+                    r: 208,
+                    g: 209,
+                    b: 230,
+                },
+                RGB {
+                    r: 166,
+                    g: 189,
+                    b: 219,
+                },
+                RGB {
+                    r: 103,
+                    g: 169,
+                    b: 207,
+                },
+                RGB {
+                    r: 54,
+                    g: 144,
+                    b: 192,
+                },
+                RGB {
+                    r: 2,
+                    g: 129,
+                    b: 138,
+                },
+                RGB {
+                    r: 1,
+                    g: 100,
+                    b: 80,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 247,
+                    b: 251,
+                },
+                RGB {
+                    r: 236,
+                    g: 226,
+                    b: 240,
+                },
+                RGB {
+                    r: 208,
+                    g: 209,
+                    b: 230,
+                },
+                RGB {
+                    r: 166,
+                    g: 189,
+                    b: 219,
+                },
+                RGB {
+                    r: 103,
+                    g: 169,
+                    b: 207,
+                },
+                RGB {
+                    r: 54,
+                    g: 144,
+                    b: 192,
+                },
+                RGB {
+                    r: 2,
+                    g: 129,
+                    b: 138,
+                },
+                RGB {
+                    r: 1,
+                    g: 100,
+                    b: 80,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 247,
+                    b: 251,
+                },
+                RGB {
+                    r: 236,
+                    g: 226,
+                    b: 240,
+                },
+                RGB {
+                    r: 208,
+                    g: 209,
+                    b: 230,
+                },
+                RGB {
+                    r: 166,
+                    g: 189,
+                    b: 219,
+                },
+                RGB {
+                    r: 103,
+                    g: 169,
+                    b: 207,
+                },
+                RGB {
+                    r: 54,
+                    g: 144,
+                    b: 192,
+                },
+                RGB {
+                    r: 2,
+                    g: 129,
+                    b: 138,
+                },
+                RGB {
+                    r: 1,
+                    g: 108,
+                    b: 89,
+                },
+                RGB { r: 1, g: 70, b: 54 },
+            ]),
+            _ => None,
+        },
+        Palette::PuBu => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 236,
+                    g: 231,
+                    b: 242,
+                },
+                RGB {
+                    r: 166,
+                    g: 189,
+                    b: 219,
+                },
+                RGB {
+                    r: 43,
+                    g: 140,
+                    b: 190,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 241,
+                    g: 238,
+                    b: 246,
+                },
+                RGB {
+                    r: 189,
+                    g: 201,
+                    b: 225,
+                },
+                RGB {
+                    r: 116,
+                    g: 169,
+                    b: 207,
+                },
+                RGB {
+                    r: 5,
+                    g: 112,
+                    b: 176,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 241,
+                    g: 238,
+                    b: 246,
+                },
+                RGB {
+                    r: 189,
+                    g: 201,
+                    b: 225,
+                },
+                RGB {
+                    r: 116,
+                    g: 169,
+                    b: 207,
+                },
+                RGB {
+                    r: 43,
+                    g: 140,
+                    b: 190,
+                },
+                RGB {
+                    r: 4,
+                    g: 90,
+                    b: 141,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 241,
+                    g: 238,
+                    b: 246,
+                },
+                RGB {
+                    r: 208,
+                    g: 209,
+                    b: 230,
+                },
+                RGB {
+                    r: 166,
+                    g: 189,
+                    b: 219,
+                },
+                RGB {
+                    r: 116,
+                    g: 169,
+                    b: 207,
+                },
+                RGB {
+                    r: 43,
+                    g: 140,
+                    b: 190,
+                },
+                RGB {
+                    r: 4,
+                    g: 90,
+                    b: 141,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 241,
+                    g: 238,
+                    b: 246,
+                },
+                RGB {
+                    r: 208,
+                    g: 209,
+                    b: 230,
+                },
+                RGB {
+                    r: 166,
+                    g: 189,
+                    b: 219,
+                },
+                RGB {
+                    r: 116,
+                    g: 169,
+                    b: 207,
+                },
+                RGB {
+                    r: 54,
+                    g: 144,
+                    b: 192,
+                },
+                RGB {
+                    r: 5,
+                    g: 112,
+                    b: 176,
+                },
+                RGB {
+                    r: 3,
+                    g: 78,
+                    b: 123,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 247,
+                    b: 251,
+                },
+                RGB {
+                    r: 236,
+                    g: 231,
+                    b: 242,
+                },
+                RGB {
+                    r: 208,
+                    g: 209,
+                    b: 230,
+                },
+                RGB {
+                    r: 166,
+                    g: 189,
+                    b: 219,
+                },
+                RGB {
+                    r: 116,
+                    g: 169,
+                    b: 207,
+                },
+                RGB {
+                    r: 54,
+                    g: 144,
+                    b: 192,
+                },
+                RGB {
+                    r: 5,
+                    g: 112,
+                    b: 176,
+                },
+                RGB {
+                    r: 3,
+                    g: 78,
+                    b: 123,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 247,
+                    b: 251,
+                },
+                RGB {
+                    r: 236,
+                    g: 231,
+                    b: 242,
+                },
+                RGB {
+                    r: 208,
+                    g: 209,
+                    b: 230,
+                },
+                RGB {
+                    r: 166,
+                    g: 189,
+                    b: 219,
+                },
+                RGB {
+                    r: 116,
+                    g: 169,
+                    b: 207,
+                },
+                RGB {
+                    r: 54,
+                    g: 144,
+                    b: 192,
+                },
+                RGB {
+                    r: 5,
+                    g: 112,
+                    b: 176,
+                },
+                RGB {
+                    r: 4,
+                    g: 90,
+                    b: 141,
+                },
+                RGB { r: 2, g: 56, b: 88 },
+            ]),
+            _ => None,
+        },
+        Palette::BuPu => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 224,
+                    g: 236,
+                    b: 244,
+                },
+                RGB {
+                    r: 158,
+                    g: 188,
+                    b: 218,
+                },
+                RGB {
+                    r: 136,
+                    g: 86,
+                    b: 167,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 237,
+                    g: 248,
+                    b: 251,
+                },
+                RGB {
+                    r: 179,
+                    g: 205,
+                    b: 227,
+                },
+                RGB {
+                    r: 140,
+                    g: 150,
+                    b: 198,
+                },
+                RGB {
+                    r: 136,
+                    g: 65,
+                    b: 157,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 237,
+                    g: 248,
+                    b: 251,
+                },
+                RGB {
+                    r: 179,
+                    g: 205,
+                    b: 227,
+                },
+                RGB {
+                    r: 140,
+                    g: 150,
+                    b: 198,
+                },
+                RGB {
+                    r: 136,
+                    g: 86,
+                    b: 167,
+                },
+                RGB {
+                    r: 129,
+                    g: 15,
+                    b: 124,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 237,
+                    g: 248,
+                    b: 251,
+                },
+                RGB {
+                    r: 191,
+                    g: 211,
+                    b: 230,
+                },
+                RGB {
+                    r: 158,
+                    g: 188,
+                    b: 218,
+                },
+                RGB {
+                    r: 140,
+                    g: 150,
+                    b: 198,
+                },
+                RGB {
+                    r: 136,
+                    g: 86,
+                    b: 167,
+                },
+                RGB {
+                    r: 129,
+                    g: 15,
+                    b: 124,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 237,
+                    g: 248,
+                    b: 251,
+                },
+                RGB {
+                    r: 191,
+                    g: 211,
+                    b: 230,
+                },
+                RGB {
+                    r: 158,
+                    g: 188,
+                    b: 218,
+                },
+                RGB {
+                    r: 140,
+                    g: 150,
+                    b: 198,
+                },
+                RGB {
+                    r: 140,
+                    g: 107,
+                    b: 177,
+                },
+                RGB {
+                    r: 136,
+                    g: 65,
+                    b: 157,
+                },
+                RGB {
+                    r: 110,
+                    g: 1,
+                    b: 107,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 247,
+                    g: 252,
+                    b: 253,
+                },
+                RGB {
+                    r: 224,
+                    g: 236,
+                    b: 244,
+                },
+                RGB {
+                    r: 191,
+                    g: 211,
+                    b: 230,
+                },
+                RGB {
+                    r: 158,
+                    g: 188,
+                    b: 218,
+                },
+                RGB {
+                    r: 140,
+                    g: 150,
+                    b: 198,
+                },
+                RGB {
+                    r: 140,
+                    g: 107,
+                    b: 177,
+                },
+                RGB {
+                    r: 136,
+                    g: 65,
+                    b: 157,
+                },
+                RGB {
+                    r: 110,
+                    g: 1,
+                    b: 107,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 247,
+                    g: 252,
+                    b: 253,
+                },
+                RGB {
+                    r: 224,
+                    g: 236,
+                    b: 244,
+                },
+                RGB {
+                    r: 191,
+                    g: 211,
+                    b: 230,
+                },
+                RGB {
+                    r: 158,
+                    g: 188,
+                    b: 218,
+                },
+                RGB {
+                    r: 140,
+                    g: 150,
+                    b: 198,
+                },
+                RGB {
+                    r: 140,
+                    g: 107,
+                    b: 177,
+                },
+                RGB {
+                    r: 136,
+                    g: 65,
+                    b: 157,
+                },
+                RGB {
+                    r: 129,
+                    g: 15,
+                    b: 124,
+                },
+                RGB { r: 77, g: 0, b: 75 },
+            ]),
+            _ => None,
+        },
+        Palette::RdPu => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 253,
+                    g: 224,
+                    b: 221,
+                },
+                RGB {
+                    r: 250,
+                    g: 159,
+                    b: 181,
+                },
+                RGB {
+                    r: 197,
+                    g: 27,
+                    b: 138,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 254,
+                    g: 235,
+                    b: 226,
+                },
+                RGB {
+                    r: 251,
+                    g: 180,
+                    b: 185,
+                },
+                RGB {
+                    r: 247,
+                    g: 104,
+                    b: 161,
+                },
+                RGB {
+                    r: 174,
+                    g: 1,
+                    b: 126,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 254,
+                    g: 235,
+                    b: 226,
+                },
+                RGB {
+                    r: 251,
+                    g: 180,
+                    b: 185,
+                },
+                RGB {
+                    r: 247,
+                    g: 104,
+                    b: 161,
+                },
+                RGB {
+                    r: 197,
+                    g: 27,
+                    b: 138,
+                },
+                RGB {
+                    r: 122,
+                    g: 1,
+                    b: 119,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 254,
+                    g: 235,
+                    b: 226,
+                },
+                RGB {
+                    r: 252,
+                    g: 197,
+                    b: 192,
+                },
+                RGB {
+                    r: 250,
+                    g: 159,
+                    b: 181,
+                },
+                RGB {
+                    r: 247,
+                    g: 104,
+                    b: 161,
+                },
+                RGB {
+                    r: 197,
+                    g: 27,
+                    b: 138,
+                },
+                RGB {
+                    r: 122,
+                    g: 1,
+                    b: 119,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 254,
+                    g: 235,
+                    b: 226,
+                },
+                RGB {
+                    r: 252,
+                    g: 197,
+                    b: 192,
+                },
+                RGB {
+                    r: 250,
+                    g: 159,
+                    b: 181,
+                },
+                RGB {
+                    r: 247,
+                    g: 104,
+                    b: 161,
+                },
+                RGB {
+                    r: 221,
+                    g: 52,
+                    b: 151,
+                },
+                RGB {
+                    r: 174,
+                    g: 1,
+                    b: 126,
+                },
+                RGB {
+                    r: 122,
+                    g: 1,
+                    b: 119,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 247,
+                    b: 243,
+                },
+                RGB {
+                    r: 253,
+                    g: 224,
+                    b: 221,
+                },
+                RGB {
+                    r: 252,
+                    g: 197,
+                    b: 192,
+                },
+                RGB {
+                    r: 250,
+                    g: 159,
+                    b: 181,
+                },
+                RGB {
+                    r: 247,
+                    g: 104,
+                    b: 161,
+                },
+                RGB {
+                    r: 221,
+                    g: 52,
+                    b: 151,
+                },
+                RGB {
+                    r: 174,
+                    g: 1,
+                    b: 126,
+                },
+                RGB {
+                    r: 122,
+                    g: 1,
+                    b: 119,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 247,
+                    b: 243,
+                },
+                RGB {
+                    r: 253,
+                    g: 224,
+                    b: 221,
+                },
+                RGB {
+                    r: 252,
+                    g: 197,
+                    b: 192,
+                },
+                RGB {
+                    r: 250,
+                    g: 159,
+                    b: 181,
+                },
+                RGB {
+                    r: 247,
+                    g: 104,
+                    b: 161,
+                },
+                RGB {
+                    r: 221,
+                    g: 52,
+                    b: 151,
+                },
+                RGB {
+                    r: 174,
+                    g: 1,
+                    b: 126,
+                },
+                RGB {
+                    r: 122,
+                    g: 1,
+                    b: 119,
+                },
+                RGB {
+                    r: 73,
+                    g: 0,
+                    b: 106,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::PuRd => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 231,
+                    g: 225,
+                    b: 239,
+                },
+                RGB {
+                    r: 201,
+                    g: 148,
+                    b: 199,
+                },
+                RGB {
+                    r: 221,
+                    g: 28,
+                    b: 119,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 241,
+                    g: 238,
+                    b: 246,
+                },
+                RGB {
+                    r: 215,
+                    g: 181,
+                    b: 216,
+                },
+                RGB {
+                    r: 223,
+                    g: 101,
+                    b: 176,
+                },
+                RGB {
+                    r: 206,
+                    g: 18,
+                    b: 86,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 241,
+                    g: 238,
+                    b: 246,
+                },
+                RGB {
+                    r: 215,
+                    g: 181,
+                    b: 216,
+                },
+                RGB {
+                    r: 223,
+                    g: 101,
+                    b: 176,
+                },
+                RGB {
+                    r: 221,
+                    g: 28,
+                    b: 119,
+                },
+                RGB {
+                    r: 152,
+                    g: 0,
+                    b: 67,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 241,
+                    g: 238,
+                    b: 246,
+                },
+                RGB {
+                    r: 212,
+                    g: 185,
+                    b: 218,
+                },
+                RGB {
+                    r: 201,
+                    g: 148,
+                    b: 199,
+                },
+                RGB {
+                    r: 223,
+                    g: 101,
+                    b: 176,
+                },
+                RGB {
+                    r: 221,
+                    g: 28,
+                    b: 119,
+                },
+                RGB {
+                    r: 152,
+                    g: 0,
+                    b: 67,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 241,
+                    g: 238,
+                    b: 246,
+                },
+                RGB {
+                    r: 212,
+                    g: 185,
+                    b: 218,
+                },
+                RGB {
+                    r: 201,
+                    g: 148,
+                    b: 199,
+                },
+                RGB {
+                    r: 223,
+                    g: 101,
+                    b: 176,
+                },
+                RGB {
+                    r: 231,
+                    g: 41,
+                    b: 138,
+                },
+                RGB {
+                    r: 206,
+                    g: 18,
+                    b: 86,
+                },
+                RGB {
+                    r: 145,
+                    g: 0,
+                    b: 63,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 247,
+                    g: 244,
+                    b: 249,
+                },
+                RGB {
+                    r: 231,
+                    g: 225,
+                    b: 239,
+                },
+                RGB {
+                    r: 212,
+                    g: 185,
+                    b: 218,
+                },
+                RGB {
+                    r: 201,
+                    g: 148,
+                    b: 199,
+                },
+                RGB {
+                    r: 223,
+                    g: 101,
+                    b: 176,
+                },
+                RGB {
+                    r: 231,
+                    g: 41,
+                    b: 138,
+                },
+                RGB {
+                    r: 206,
+                    g: 18,
+                    b: 86,
+                },
+                RGB {
+                    r: 145,
+                    g: 0,
+                    b: 63,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 247,
+                    g: 244,
+                    b: 249,
+                },
+                RGB {
+                    r: 231,
+                    g: 225,
+                    b: 239,
+                },
+                RGB {
+                    r: 212,
+                    g: 185,
+                    b: 218,
+                },
+                RGB {
+                    r: 201,
+                    g: 148,
+                    b: 199,
+                },
+                RGB {
+                    r: 223,
+                    g: 101,
+                    b: 176,
+                },
+                RGB {
+                    r: 231,
+                    g: 41,
+                    b: 138,
+                },
+                RGB {
+                    r: 206,
+                    g: 18,
+                    b: 86,
+                },
+                RGB {
+                    r: 152,
+                    g: 0,
+                    b: 67,
+                },
+                RGB {
+                    r: 103,
+                    g: 0,
+                    b: 31,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::OrRd => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 254,
+                    g: 232,
+                    b: 200,
+                },
+                RGB {
+                    r: 253,
+                    g: 187,
+                    b: 132,
+                },
+                RGB {
+                    r: 227,
+                    g: 74,
+                    b: 51,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 254,
+                    g: 240,
+                    b: 217,
+                },
+                RGB {
+                    r: 253,
+                    g: 204,
+                    b: 138,
+                },
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 89,
+                },
+                RGB {
+                    r: 215,
+                    g: 48,
+                    b: 31,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 254,
+                    g: 240,
+                    b: 217,
+                },
+                RGB {
+                    r: 253,
+                    g: 204,
+                    b: 138,
+                },
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 89,
+                },
+                RGB {
+                    r: 227,
+                    g: 74,
+                    b: 51,
+                },
+                RGB { r: 179, g: 0, b: 0 },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 254,
+                    g: 240,
+                    b: 217,
+                },
+                RGB {
+                    r: 253,
+                    g: 212,
+                    b: 158,
+                },
+                RGB {
+                    r: 253,
+                    g: 187,
+                    b: 132,
+                },
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 89,
+                },
+                RGB {
+                    r: 227,
+                    g: 74,
+                    b: 51,
+                },
+                RGB { r: 179, g: 0, b: 0 },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 254,
+                    g: 240,
+                    b: 217,
+                },
+                RGB {
+                    r: 253,
+                    g: 212,
+                    b: 158,
+                },
+                RGB {
+                    r: 253,
+                    g: 187,
+                    b: 132,
+                },
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 89,
+                },
+                RGB {
+                    r: 239,
+                    g: 101,
+                    b: 72,
+                },
+                RGB {
+                    r: 215,
+                    g: 48,
+                    b: 31,
+                },
+                RGB { r: 153, g: 0, b: 0 },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 247,
+                    b: 236,
+                },
+                RGB {
+                    r: 254,
+                    g: 232,
+                    b: 200,
+                },
+                RGB {
+                    r: 253,
+                    g: 212,
+                    b: 158,
+                },
+                RGB {
+                    r: 253,
+                    g: 187,
+                    b: 132,
+                },
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 89,
+                },
+                RGB {
+                    r: 239,
+                    g: 101,
+                    b: 72,
+                },
+                RGB {
+                    r: 215,
+                    g: 48,
+                    b: 31,
+                },
+                RGB { r: 153, g: 0, b: 0 },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 247,
+                    b: 236,
+                },
+                RGB {
+                    r: 254,
+                    g: 232,
+                    b: 200,
+                },
+                RGB {
+                    r: 253,
+                    g: 212,
+                    b: 158,
+                },
+                RGB {
+                    r: 253,
+                    g: 187,
+                    b: 132,
+                },
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 89,
+                },
+                RGB {
+                    r: 239,
+                    g: 101,
+                    b: 72,
+                },
+                RGB {
+                    r: 215,
+                    g: 48,
+                    b: 31,
+                },
+                RGB { r: 179, g: 0, b: 0 },
+                RGB { r: 127, g: 0, b: 0 },
+            ]),
+            _ => None,
+        },
+        Palette::YlOrRd => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 237,
+                    b: 160,
+                },
+                RGB {
+                    r: 254,
+                    g: 178,
+                    b: 76,
+                },
+                RGB {
+                    r: 240,
+                    g: 59,
+                    b: 32,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 178,
+                },
+                RGB {
+                    r: 254,
+                    g: 204,
+                    b: 92,
+                },
+                RGB {
+                    r: 253,
+                    g: 141,
+                    b: 60,
+                },
+                RGB {
+                    r: 227,
+                    g: 26,
+                    b: 28,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 178,
+                },
+                RGB {
+                    r: 254,
+                    g: 204,
+                    b: 92,
+                },
+                RGB {
+                    r: 253,
+                    g: 141,
+                    b: 60,
+                },
+                RGB {
+                    r: 240,
+                    g: 59,
+                    b: 32,
+                },
+                RGB {
+                    r: 189,
+                    g: 0,
+                    b: 38,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 178,
+                },
+                RGB {
+                    r: 254,
+                    g: 217,
+                    b: 118,
+                },
+                RGB {
+                    r: 254,
+                    g: 178,
+                    b: 76,
+                },
+                RGB {
+                    r: 253,
+                    g: 141,
+                    b: 60,
+                },
+                RGB {
+                    r: 240,
+                    g: 59,
+                    b: 32,
+                },
+                RGB {
+                    r: 189,
+                    g: 0,
+                    b: 38,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 178,
+                },
+                RGB {
+                    r: 254,
+                    g: 217,
+                    b: 118,
+                },
+                RGB {
+                    r: 254,
+                    g: 178,
+                    b: 76,
+                },
+                RGB {
+                    r: 253,
+                    g: 141,
+                    b: 60,
+                },
+                RGB {
+                    r: 252,
+                    g: 78,
+                    b: 42,
+                },
+                RGB {
+                    r: 227,
+                    g: 26,
+                    b: 28,
+                },
+                RGB {
+                    r: 177,
+                    g: 0,
+                    b: 38,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 204,
+                },
+                RGB {
+                    r: 255,
+                    g: 237,
+                    b: 160,
+                },
+                RGB {
+                    r: 254,
+                    g: 217,
+                    b: 118,
+                },
+                RGB {
+                    r: 254,
+                    g: 178,
+                    b: 76,
+                },
+                RGB {
+                    r: 253,
+                    g: 141,
+                    b: 60,
+                },
+                RGB {
+                    r: 252,
+                    g: 78,
+                    b: 42,
+                },
+                RGB {
+                    r: 227,
+                    g: 26,
+                    b: 28,
+                },
+                RGB {
+                    r: 177,
+                    g: 0,
+                    b: 38,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 204,
+                },
+                RGB {
+                    r: 255,
+                    g: 237,
+                    b: 160,
+                },
+                RGB {
+                    r: 254,
+                    g: 217,
+                    b: 118,
+                },
+                RGB {
+                    r: 254,
+                    g: 178,
+                    b: 76,
+                },
+                RGB {
+                    r: 253,
+                    g: 141,
+                    b: 60,
+                },
+                RGB {
+                    r: 252,
+                    g: 78,
+                    b: 42,
+                },
+                RGB {
+                    r: 227,
+                    g: 26,
+                    b: 28,
+                },
+                RGB {
+                    r: 189,
+                    g: 0,
+                    b: 38,
+                },
+                RGB {
+                    r: 128,
+                    g: 0,
+                    b: 38,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::YlOrBr => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 247,
+                    b: 188,
+                },
+                RGB {
+                    r: 254,
+                    g: 196,
+                    b: 79,
+                },
+                RGB {
+                    r: 217,
+                    g: 95,
+                    b: 14,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 212,
+                },
+                RGB {
+                    r: 254,
+                    g: 217,
+                    b: 142,
+                },
+                RGB {
+                    r: 254,
+                    g: 153,
+                    b: 41,
+                },
+                RGB {
+                    r: 204,
+                    g: 76,
+                    b: 2,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 212,
+                },
+                RGB {
+                    r: 254,
+                    g: 217,
+                    b: 142,
+                },
+                RGB {
+                    r: 254,
+                    g: 153,
+                    b: 41,
+                },
+                RGB {
+                    r: 217,
+                    g: 95,
+                    b: 14,
+                },
+                RGB {
+                    r: 153,
+                    g: 52,
+                    b: 4,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 212,
+                },
+                RGB {
+                    r: 254,
+                    g: 227,
+                    b: 145,
+                },
+                RGB {
+                    r: 254,
+                    g: 196,
+                    b: 79,
+                },
+                RGB {
+                    r: 254,
+                    g: 153,
+                    b: 41,
+                },
+                RGB {
+                    r: 217,
+                    g: 95,
+                    b: 14,
+                },
+                RGB {
+                    r: 153,
+                    g: 52,
+                    b: 4,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 212,
+                },
+                RGB {
+                    r: 254,
+                    g: 227,
+                    b: 145,
+                },
+                RGB {
+                    r: 254,
+                    g: 196,
+                    b: 79,
+                },
+                RGB {
+                    r: 254,
+                    g: 153,
+                    b: 41,
+                },
+                RGB {
+                    r: 236,
+                    g: 112,
+                    b: 20,
+                },
+                RGB {
+                    r: 204,
+                    g: 76,
+                    b: 2,
+                },
+                RGB {
+                    r: 140,
+                    g: 45,
+                    b: 4,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 229,
+                },
+                RGB {
+                    r: 255,
+                    g: 247,
+                    b: 188,
+                },
+                RGB {
+                    r: 254,
+                    g: 227,
+                    b: 145,
+                },
+                RGB {
+                    r: 254,
+                    g: 196,
+                    b: 79,
+                },
+                RGB {
+                    r: 254,
+                    g: 153,
+                    b: 41,
+                },
+                RGB {
+                    r: 236,
+                    g: 112,
+                    b: 20,
+                },
+                RGB {
+                    r: 204,
+                    g: 76,
+                    b: 2,
+                },
+                RGB {
+                    r: 140,
+                    g: 45,
+                    b: 4,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 229,
+                },
+                RGB {
+                    r: 255,
+                    g: 247,
+                    b: 188,
+                },
+                RGB {
+                    r: 254,
+                    g: 227,
+                    b: 145,
+                },
+                RGB {
+                    r: 254,
+                    g: 196,
+                    b: 79,
+                },
+                RGB {
+                    r: 254,
+                    g: 153,
+                    b: 41,
+                },
+                RGB {
+                    r: 236,
+                    g: 112,
+                    b: 20,
+                },
+                RGB {
+                    r: 204,
+                    g: 76,
+                    b: 2,
+                },
+                RGB {
+                    r: 153,
+                    g: 52,
+                    b: 4,
+                },
+                RGB {
+                    r: 102,
+                    g: 37,
+                    b: 6,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::Purples => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 239,
+                    g: 237,
+                    b: 245,
+                },
+                RGB {
+                    r: 188,
+                    g: 189,
+                    b: 220,
+                },
+                RGB {
+                    r: 117,
+                    g: 107,
+                    b: 177,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 242,
+                    g: 240,
+                    b: 247,
+                },
+                RGB {
+                    r: 203,
+                    g: 201,
+                    b: 226,
+                },
+                RGB {
+                    r: 158,
+                    g: 154,
+                    b: 200,
+                },
+                RGB {
+                    r: 106,
+                    g: 81,
+                    b: 163,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 242,
+                    g: 240,
+                    b: 247,
+                },
+                RGB {
+                    r: 203,
+                    g: 201,
+                    b: 226,
+                },
+                RGB {
+                    r: 158,
+                    g: 154,
+                    b: 200,
+                },
+                RGB {
+                    r: 117,
+                    g: 107,
+                    b: 177,
+                },
+                RGB {
+                    r: 84,
+                    g: 39,
+                    b: 143,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 242,
+                    g: 240,
+                    b: 247,
+                },
+                RGB {
+                    r: 218,
+                    g: 218,
+                    b: 235,
+                },
+                RGB {
+                    r: 188,
+                    g: 189,
+                    b: 220,
+                },
+                RGB {
+                    r: 158,
+                    g: 154,
+                    b: 200,
+                },
+                RGB {
+                    r: 117,
+                    g: 107,
+                    b: 177,
+                },
+                RGB {
+                    r: 84,
+                    g: 39,
+                    b: 143,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 242,
+                    g: 240,
+                    b: 247,
+                },
+                RGB {
+                    r: 218,
+                    g: 218,
+                    b: 235,
+                },
+                RGB {
+                    r: 188,
+                    g: 189,
+                    b: 220,
+                },
+                RGB {
+                    r: 158,
+                    g: 154,
+                    b: 200,
+                },
+                RGB {
+                    r: 128,
+                    g: 125,
+                    b: 186,
+                },
+                RGB {
+                    r: 106,
+                    g: 81,
+                    b: 163,
+                },
+                RGB {
+                    r: 74,
+                    g: 20,
+                    b: 134,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 252,
+                    g: 251,
+                    b: 253,
+                },
+                RGB {
+                    r: 239,
+                    g: 237,
+                    b: 245,
+                },
+                RGB {
+                    r: 218,
+                    g: 218,
+                    b: 235,
+                },
+                RGB {
+                    r: 188,
+                    g: 189,
+                    b: 220,
+                },
+                RGB {
+                    r: 158,
+                    g: 154,
+                    b: 200,
+                },
+                RGB {
+                    r: 128,
+                    g: 125,
+                    b: 186,
+                },
+                RGB {
+                    r: 106,
+                    g: 81,
+                    b: 163,
+                },
+                RGB {
+                    r: 74,
+                    g: 20,
+                    b: 134,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 252,
+                    g: 251,
+                    b: 253,
+                },
+                RGB {
+                    r: 239,
+                    g: 237,
+                    b: 245,
+                },
+                RGB {
+                    r: 218,
+                    g: 218,
+                    b: 235,
+                },
+                RGB {
+                    r: 188,
+                    g: 189,
+                    b: 220,
+                },
+                RGB {
+                    r: 158,
+                    g: 154,
+                    b: 200,
+                },
+                RGB {
+                    r: 128,
+                    g: 125,
+                    b: 186,
+                },
+                RGB {
+                    r: 106,
+                    g: 81,
+                    b: 163,
+                },
+                RGB {
+                    r: 84,
+                    g: 39,
+                    b: 143,
+                },
+                RGB {
+                    r: 63,
+                    g: 0,
+                    b: 125,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::Blues => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 222,
+                    g: 235,
+                    b: 247,
+                },
+                RGB {
+                    r: 158,
+                    g: 202,
+                    b: 225,
+                },
+                RGB {
+                    r: 49,
+                    g: 130,
+                    b: 189,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 239,
+                    g: 243,
+                    b: 255,
+                },
+                RGB {
+                    r: 189,
+                    g: 215,
+                    b: 231,
+                },
+                RGB {
+                    r: 107,
+                    g: 174,
+                    b: 214,
+                },
+                RGB {
+                    r: 33,
+                    g: 113,
+                    b: 181,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 239,
+                    g: 243,
+                    b: 255,
+                },
+                RGB {
+                    r: 189,
+                    g: 215,
+                    b: 231,
+                },
+                RGB {
+                    r: 107,
+                    g: 174,
+                    b: 214,
+                },
+                RGB {
+                    r: 49,
+                    g: 130,
+                    b: 189,
+                },
+                RGB {
+                    r: 8,
+                    g: 81,
+                    b: 156,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 239,
+                    g: 243,
+                    b: 255,
+                },
+                RGB {
+                    r: 198,
+                    g: 219,
+                    b: 239,
+                },
+                RGB {
+                    r: 158,
+                    g: 202,
+                    b: 225,
+                },
+                RGB {
+                    r: 107,
+                    g: 174,
+                    b: 214,
+                },
+                RGB {
+                    r: 49,
+                    g: 130,
+                    b: 189,
+                },
+                RGB {
+                    r: 8,
+                    g: 81,
+                    b: 156,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 239,
+                    g: 243,
+                    b: 255,
+                },
+                RGB {
+                    r: 198,
+                    g: 219,
+                    b: 239,
+                },
+                RGB {
+                    r: 158,
+                    g: 202,
+                    b: 225,
+                },
+                RGB {
+                    r: 107,
+                    g: 174,
+                    b: 214,
+                },
+                RGB {
+                    r: 66,
+                    g: 146,
+                    b: 198,
+                },
+                RGB {
+                    r: 33,
+                    g: 113,
+                    b: 181,
+                },
+                RGB {
+                    r: 8,
+                    g: 69,
+                    b: 148,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 247,
+                    g: 251,
+                    b: 255,
+                },
+                RGB {
+                    r: 222,
+                    g: 235,
+                    b: 247,
+                },
+                RGB {
+                    r: 198,
+                    g: 219,
+                    b: 239,
+                },
+                RGB {
+                    r: 158,
+                    g: 202,
+                    b: 225,
+                },
+                RGB {
+                    r: 107,
+                    g: 174,
+                    b: 214,
+                },
+                RGB {
+                    r: 66,
+                    g: 146,
+                    b: 198,
+                },
+                RGB {
+                    r: 33,
+                    g: 113,
+                    b: 181,
+                },
+                RGB {
+                    r: 8,
+                    g: 69,
+                    b: 148,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 247,
+                    g: 251,
+                    b: 255,
+                },
+                RGB {
+                    r: 222,
+                    g: 235,
+                    b: 247,
+                },
+                RGB {
+                    r: 198,
+                    g: 219,
+                    b: 239,
+                },
+                RGB {
+                    r: 158,
+                    g: 202,
+                    b: 225,
+                },
+                RGB {
+                    r: 107,
+                    g: 174,
+                    b: 214,
+                },
+                RGB {
+                    r: 66,
+                    g: 146,
+                    b: 198,
+                },
+                RGB {
+                    r: 33,
+                    g: 113,
+                    b: 181,
+                },
+                RGB {
+                    r: 8,
+                    g: 81,
+                    b: 156,
+                },
+                RGB {
+                    r: 8,
+                    g: 48,
+                    b: 107,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::Greens => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 229,
+                    g: 245,
+                    b: 224,
+                },
+                RGB {
+                    r: 161,
+                    g: 217,
+                    b: 155,
+                },
+                RGB {
+                    r: 49,
+                    g: 163,
+                    b: 84,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 237,
+                    g: 248,
+                    b: 233,
+                },
+                RGB {
+                    r: 186,
+                    g: 228,
+                    b: 179,
+                },
+                RGB {
+                    r: 116,
+                    g: 196,
+                    b: 118,
+                },
+                RGB {
+                    r: 35,
+                    g: 139,
+                    b: 69,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 237,
+                    g: 248,
+                    b: 233,
+                },
+                RGB {
+                    r: 186,
+                    g: 228,
+                    b: 179,
+                },
+                RGB {
+                    r: 116,
+                    g: 196,
+                    b: 118,
+                },
+                RGB {
+                    r: 49,
+                    g: 163,
+                    b: 84,
+                },
+                RGB {
+                    r: 0,
+                    g: 109,
+                    b: 44,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 237,
+                    g: 248,
+                    b: 233,
+                },
+                RGB {
+                    r: 199,
+                    g: 233,
+                    b: 192,
+                },
+                RGB {
+                    r: 161,
+                    g: 217,
+                    b: 155,
+                },
+                RGB {
+                    r: 116,
+                    g: 196,
+                    b: 118,
+                },
+                RGB {
+                    r: 49,
+                    g: 163,
+                    b: 84,
+                },
+                RGB {
+                    r: 0,
+                    g: 109,
+                    b: 44,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 237,
+                    g: 248,
+                    b: 233,
+                },
+                RGB {
+                    r: 199,
+                    g: 233,
+                    b: 192,
+                },
+                RGB {
+                    r: 161,
+                    g: 217,
+                    b: 155,
+                },
+                RGB {
+                    r: 116,
+                    g: 196,
+                    b: 118,
+                },
+                RGB {
+                    r: 65,
+                    g: 171,
+                    b: 93,
+                },
+                RGB {
+                    r: 35,
+                    g: 139,
+                    b: 69,
+                },
+                RGB { r: 0, g: 90, b: 50 },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 247,
+                    g: 252,
+                    b: 245,
+                },
+                RGB {
+                    r: 229,
+                    g: 245,
+                    b: 224,
+                },
+                RGB {
+                    r: 199,
+                    g: 233,
+                    b: 192,
+                },
+                RGB {
+                    r: 161,
+                    g: 217,
+                    b: 155,
+                },
+                RGB {
+                    r: 116,
+                    g: 196,
+                    b: 118,
+                },
+                RGB {
+                    r: 65,
+                    g: 171,
+                    b: 93,
+                },
+                RGB {
+                    r: 35,
+                    g: 139,
+                    b: 69,
+                },
+                RGB { r: 0, g: 90, b: 50 },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 247,
+                    g: 252,
+                    b: 245,
+                },
+                RGB {
+                    r: 229,
+                    g: 245,
+                    b: 224,
+                },
+                RGB {
+                    r: 199,
+                    g: 233,
+                    b: 192,
+                },
+                RGB {
+                    r: 161,
+                    g: 217,
+                    b: 155,
+                },
+                RGB {
+                    r: 116,
+                    g: 196,
+                    b: 118,
+                },
+                RGB {
+                    r: 65,
+                    g: 171,
+                    b: 93,
+                },
+                RGB {
+                    r: 35,
+                    g: 139,
+                    b: 69,
+                },
+                RGB {
+                    r: 0,
+                    g: 109,
+                    b: 44,
+                },
+                RGB { r: 0, g: 68, b: 27 },
+            ]),
+            _ => None,
+        },
+        Palette::Oranges => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 254,
+                    g: 230,
+                    b: 206,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 107,
+                },
+                RGB {
+                    r: 230,
+                    g: 85,
+                    b: 13,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 254,
+                    g: 237,
+                    b: 222,
+                },
+                RGB {
+                    r: 253,
+                    g: 190,
+                    b: 133,
+                },
+                RGB {
+                    r: 253,
+                    g: 141,
+                    b: 60,
+                },
+                RGB {
+                    r: 217,
+                    g: 71,
+                    b: 1,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 254,
+                    g: 237,
+                    b: 222,
+                },
+                RGB {
+                    r: 253,
+                    g: 190,
+                    b: 133,
+                },
+                RGB {
+                    r: 253,
+                    g: 141,
+                    b: 60,
+                },
+                RGB {
+                    r: 230,
+                    g: 85,
+                    b: 13,
+                },
+                RGB {
+                    r: 166,
+                    g: 54,
+                    b: 3,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 254,
+                    g: 237,
+                    b: 222,
+                },
+                RGB {
+                    r: 253,
+                    g: 208,
+                    b: 162,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 107,
+                },
+                RGB {
+                    r: 253,
+                    g: 141,
+                    b: 60,
+                },
+                RGB {
+                    r: 230,
+                    g: 85,
+                    b: 13,
+                },
+                RGB {
+                    r: 166,
+                    g: 54,
+                    b: 3,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 254,
+                    g: 237,
+                    b: 222,
+                },
+                RGB {
+                    r: 253,
+                    g: 208,
+                    b: 162,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 107,
+                },
+                RGB {
+                    r: 253,
+                    g: 141,
+                    b: 60,
+                },
+                RGB {
+                    r: 241,
+                    g: 105,
+                    b: 19,
+                },
+                RGB {
+                    r: 217,
+                    g: 72,
+                    b: 1,
+                },
+                RGB {
+                    r: 140,
+                    g: 45,
+                    b: 4,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 245,
+                    b: 235,
+                },
+                RGB {
+                    r: 254,
+                    g: 230,
+                    b: 206,
+                },
+                RGB {
+                    r: 253,
+                    g: 208,
+                    b: 162,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 107,
+                },
+                RGB {
+                    r: 253,
+                    g: 141,
+                    b: 60,
+                },
+                RGB {
+                    r: 241,
+                    g: 105,
+                    b: 19,
+                },
+                RGB {
+                    r: 217,
+                    g: 72,
+                    b: 1,
+                },
+                RGB {
+                    r: 140,
+                    g: 45,
+                    b: 4,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 245,
+                    b: 235,
+                },
+                RGB {
+                    r: 254,
+                    g: 230,
+                    b: 206,
+                },
+                RGB {
+                    r: 253,
+                    g: 208,
+                    b: 162,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 107,
+                },
+                RGB {
+                    r: 253,
+                    g: 141,
+                    b: 60,
+                },
+                RGB {
+                    r: 241,
+                    g: 105,
+                    b: 19,
+                },
+                RGB {
+                    r: 217,
+                    g: 72,
+                    b: 1,
+                },
+                RGB {
+                    r: 166,
+                    g: 54,
+                    b: 3,
+                },
+                RGB {
+                    r: 127,
+                    g: 39,
+                    b: 4,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::Reds => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 210,
+                },
+                RGB {
+                    r: 252,
+                    g: 146,
+                    b: 114,
+                },
+                RGB {
+                    r: 222,
+                    g: 45,
+                    b: 38,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 254,
+                    g: 229,
+                    b: 217,
+                },
+                RGB {
+                    r: 252,
+                    g: 174,
+                    b: 145,
+                },
+                RGB {
+                    r: 251,
+                    g: 106,
+                    b: 74,
+                },
+                RGB {
+                    r: 203,
+                    g: 24,
+                    b: 29,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 254,
+                    g: 229,
+                    b: 217,
+                },
+                RGB {
+                    r: 252,
+                    g: 174,
+                    b: 145,
+                },
+                RGB {
+                    r: 251,
+                    g: 106,
+                    b: 74,
+                },
+                RGB {
+                    r: 222,
+                    g: 45,
+                    b: 38,
+                },
+                RGB {
+                    r: 165,
+                    g: 15,
+                    b: 21,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 254,
+                    g: 229,
+                    b: 217,
+                },
+                RGB {
+                    r: 252,
+                    g: 187,
+                    b: 161,
+                },
+                RGB {
+                    r: 252,
+                    g: 146,
+                    b: 114,
+                },
+                RGB {
+                    r: 251,
+                    g: 106,
+                    b: 74,
+                },
+                RGB {
+                    r: 222,
+                    g: 45,
+                    b: 38,
+                },
+                RGB {
+                    r: 165,
+                    g: 15,
+                    b: 21,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 254,
+                    g: 229,
+                    b: 217,
+                },
+                RGB {
+                    r: 252,
+                    g: 187,
+                    b: 161,
+                },
+                RGB {
+                    r: 252,
+                    g: 146,
+                    b: 114,
+                },
+                RGB {
+                    r: 251,
+                    g: 106,
+                    b: 74,
+                },
+                RGB {
+                    r: 239,
+                    g: 59,
+                    b: 44,
+                },
+                RGB {
+                    r: 203,
+                    g: 24,
+                    b: 29,
+                },
+                RGB {
+                    r: 153,
+                    g: 0,
+                    b: 13,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 245,
+                    b: 240,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 210,
+                },
+                RGB {
+                    r: 252,
+                    g: 187,
+                    b: 161,
+                },
+                RGB {
+                    r: 252,
+                    g: 146,
+                    b: 114,
+                },
+                RGB {
+                    r: 251,
+                    g: 106,
+                    b: 74,
+                },
+                RGB {
+                    r: 239,
+                    g: 59,
+                    b: 44,
+                },
+                RGB {
+                    r: 203,
+                    g: 24,
+                    b: 29,
+                },
+                RGB {
+                    r: 153,
+                    g: 0,
+                    b: 13,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 245,
+                    b: 240,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 210,
+                },
+                RGB {
+                    r: 252,
+                    g: 187,
+                    b: 161,
+                },
+                RGB {
+                    r: 252,
+                    g: 146,
+                    b: 114,
+                },
+                RGB {
+                    r: 251,
+                    g: 106,
+                    b: 74,
+                },
+                RGB {
+                    r: 239,
+                    g: 59,
+                    b: 44,
+                },
+                RGB {
+                    r: 203,
+                    g: 24,
+                    b: 29,
+                },
+                RGB {
+                    r: 165,
+                    g: 15,
+                    b: 21,
+                },
+                RGB {
+                    r: 103,
+                    g: 0,
+                    b: 13,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::Greys => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 240,
+                    g: 240,
+                    b: 240,
+                },
+                RGB {
+                    r: 189,
+                    g: 189,
+                    b: 189,
+                },
+                RGB {
+                    r: 99,
+                    g: 99,
+                    b: 99,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 204,
+                    g: 204,
+                    b: 204,
+                },
+                RGB {
+                    r: 150,
+                    g: 150,
+                    b: 150,
+                },
+                RGB {
+                    r: 82,
+                    g: 82,
+                    b: 82,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 204,
+                    g: 204,
+                    b: 204,
+                },
+                RGB {
+                    r: 150,
+                    g: 150,
+                    b: 150,
+                },
+                RGB {
+                    r: 99,
+                    g: 99,
+                    b: 99,
+                },
+                RGB {
+                    r: 37,
+                    g: 37,
+                    b: 37,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 217,
+                    g: 217,
+                    b: 217,
+                },
+                RGB {
+                    r: 189,
+                    g: 189,
+                    b: 189,
+                },
+                RGB {
+                    r: 150,
+                    g: 150,
+                    b: 150,
+                },
+                RGB {
+                    r: 99,
+                    g: 99,
+                    b: 99,
+                },
+                RGB {
+                    r: 37,
+                    g: 37,
+                    b: 37,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 217,
+                    g: 217,
+                    b: 217,
+                },
+                RGB {
+                    r: 189,
+                    g: 189,
+                    b: 189,
+                },
+                RGB {
+                    r: 150,
+                    g: 150,
+                    b: 150,
+                },
+                RGB {
+                    r: 115,
+                    g: 115,
+                    b: 115,
+                },
+                RGB {
+                    r: 82,
+                    g: 82,
+                    b: 82,
+                },
+                RGB {
+                    r: 37,
+                    g: 37,
+                    b: 37,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 255,
+                },
+                RGB {
+                    r: 240,
+                    g: 240,
+                    b: 240,
+                },
+                RGB {
+                    r: 217,
+                    g: 217,
+                    b: 217,
+                },
+                RGB {
+                    r: 189,
+                    g: 189,
+                    b: 189,
+                },
+                RGB {
+                    r: 150,
+                    g: 150,
+                    b: 150,
+                },
+                RGB {
+                    r: 115,
+                    g: 115,
+                    b: 115,
+                },
+                RGB {
+                    r: 82,
+                    g: 82,
+                    b: 82,
+                },
+                RGB {
+                    r: 37,
+                    g: 37,
+                    b: 37,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 255,
+                },
+                RGB {
+                    r: 240,
+                    g: 240,
+                    b: 240,
+                },
+                RGB {
+                    r: 217,
+                    g: 217,
+                    b: 217,
+                },
+                RGB {
+                    r: 189,
+                    g: 189,
+                    b: 189,
+                },
+                RGB {
+                    r: 150,
+                    g: 150,
+                    b: 150,
+                },
+                RGB {
+                    r: 115,
+                    g: 115,
+                    b: 115,
+                },
+                RGB {
+                    r: 82,
+                    g: 82,
+                    b: 82,
+                },
+                RGB {
+                    r: 37,
+                    g: 37,
+                    b: 37,
+                },
+                RGB { r: 0, g: 0, b: 0 },
+            ]),
+            _ => None,
+        },
+        Palette::PuOr => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 241,
+                    g: 163,
+                    b: 64,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 153,
+                    g: 142,
+                    b: 195,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 230,
+                    g: 97,
+                    b: 1,
+                },
+                RGB {
+                    r: 253,
+                    g: 184,
+                    b: 99,
+                },
+                RGB {
+                    r: 178,
+                    g: 171,
+                    b: 210,
+                },
+                RGB {
+                    r: 94,
+                    g: 60,
+                    b: 153,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 230,
+                    g: 97,
+                    b: 1,
+                },
+                RGB {
+                    r: 253,
+                    g: 184,
+                    b: 99,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 178,
+                    g: 171,
+                    b: 210,
+                },
+                RGB {
+                    r: 94,
+                    g: 60,
+                    b: 153,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 179,
+                    g: 88,
+                    b: 6,
+                },
+                RGB {
+                    r: 241,
+                    g: 163,
+                    b: 64,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 182,
+                },
+                RGB {
+                    r: 216,
+                    g: 218,
+                    b: 235,
+                },
+                RGB {
+                    r: 153,
+                    g: 142,
+                    b: 195,
+                },
+                RGB {
+                    r: 84,
+                    g: 39,
+                    b: 136,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 179,
+                    g: 88,
+                    b: 6,
+                },
+                RGB {
+                    r: 241,
+                    g: 163,
+                    b: 64,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 182,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 216,
+                    g: 218,
+                    b: 235,
+                },
+                RGB {
+                    r: 153,
+                    g: 142,
+                    b: 195,
+                },
+                RGB {
+                    r: 84,
+                    g: 39,
+                    b: 136,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 179,
+                    g: 88,
+                    b: 6,
+                },
+                RGB {
+                    r: 224,
+                    g: 130,
+                    b: 20,
+                },
+                RGB {
+                    r: 253,
+                    g: 184,
+                    b: 99,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 182,
+                },
+                RGB {
+                    r: 216,
+                    g: 218,
+                    b: 235,
+                },
+                RGB {
+                    r: 178,
+                    g: 171,
+                    b: 210,
+                },
+                RGB {
+                    r: 128,
+                    g: 115,
+                    b: 172,
+                },
+                RGB {
+                    r: 84,
+                    g: 39,
+                    b: 136,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 179,
+                    g: 88,
+                    b: 6,
+                },
+                RGB {
+                    r: 224,
+                    g: 130,
+                    b: 20,
+                },
+                RGB {
+                    r: 253,
+                    g: 184,
+                    b: 99,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 182,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 216,
+                    g: 218,
+                    b: 235,
+                },
+                RGB {
+                    r: 178,
+                    g: 171,
+                    b: 210,
+                },
+                RGB {
+                    r: 128,
+                    g: 115,
+                    b: 172,
+                },
+                RGB {
+                    r: 84,
+                    g: 39,
+                    b: 136,
+                },
+            ]),
+            10 => Some(vec![
+                RGB {
+                    r: 127,
+                    g: 59,
+                    b: 8,
+                },
+                RGB {
+                    r: 179,
+                    g: 88,
+                    b: 6,
+                },
+                RGB {
+                    r: 224,
+                    g: 130,
+                    b: 20,
+                },
+                RGB {
+                    r: 253,
+                    g: 184,
+                    b: 99,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 182,
+                },
+                RGB {
+                    r: 216,
+                    g: 218,
+                    b: 235,
+                },
+                RGB {
+                    r: 178,
+                    g: 171,
+                    b: 210,
+                },
+                RGB {
+                    r: 128,
+                    g: 115,
+                    b: 172,
+                },
+                RGB {
+                    r: 84,
+                    g: 39,
+                    b: 136,
+                },
+                RGB { r: 45, g: 0, b: 75 },
+            ]),
+            11 => Some(vec![
+                RGB {
+                    r: 127,
+                    g: 59,
+                    b: 8,
+                },
+                RGB {
+                    r: 179,
+                    g: 88,
+                    b: 6,
+                },
+                RGB {
+                    r: 224,
+                    g: 130,
+                    b: 20,
+                },
+                RGB {
+                    r: 253,
+                    g: 184,
+                    b: 99,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 182,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 216,
+                    g: 218,
+                    b: 235,
+                },
+                RGB {
+                    r: 178,
+                    g: 171,
+                    b: 210,
+                },
+                RGB {
+                    r: 128,
+                    g: 115,
+                    b: 172,
+                },
+                RGB {
+                    r: 84,
+                    g: 39,
+                    b: 136,
+                },
+                RGB { r: 45, g: 0, b: 75 },
+            ]),
+            _ => None,
+        },
+        Palette::BrBG => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 216,
+                    g: 179,
+                    b: 101,
+                },
+                RGB {
+                    r: 245,
+                    g: 245,
+                    b: 245,
+                },
+                RGB {
+                    r: 90,
+                    g: 180,
+                    b: 172,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 166,
+                    g: 97,
+                    b: 26,
+                },
+                RGB {
+                    r: 223,
+                    g: 194,
+                    b: 125,
+                },
+                RGB {
+                    r: 128,
+                    g: 205,
+                    b: 193,
+                },
+                RGB {
+                    r: 1,
+                    g: 133,
+                    b: 113,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 166,
+                    g: 97,
+                    b: 26,
+                },
+                RGB {
+                    r: 223,
+                    g: 194,
+                    b: 125,
+                },
+                RGB {
+                    r: 245,
+                    g: 245,
+                    b: 245,
+                },
+                RGB {
+                    r: 128,
+                    g: 205,
+                    b: 193,
+                },
+                RGB {
+                    r: 1,
+                    g: 133,
+                    b: 113,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 140,
+                    g: 81,
+                    b: 10,
+                },
+                RGB {
+                    r: 216,
+                    g: 179,
+                    b: 101,
+                },
+                RGB {
+                    r: 246,
+                    g: 232,
+                    b: 195,
+                },
+                RGB {
+                    r: 199,
+                    g: 234,
+                    b: 229,
+                },
+                RGB {
+                    r: 90,
+                    g: 180,
+                    b: 172,
+                },
+                RGB {
+                    r: 1,
+                    g: 102,
+                    b: 94,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 140,
+                    g: 81,
+                    b: 10,
+                },
+                RGB {
+                    r: 216,
+                    g: 179,
+                    b: 101,
+                },
+                RGB {
+                    r: 246,
+                    g: 232,
+                    b: 195,
+                },
+                RGB {
+                    r: 245,
+                    g: 245,
+                    b: 245,
+                },
+                RGB {
+                    r: 199,
+                    g: 234,
+                    b: 229,
+                },
+                RGB {
+                    r: 90,
+                    g: 180,
+                    b: 172,
+                },
+                RGB {
+                    r: 1,
+                    g: 102,
+                    b: 94,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 140,
+                    g: 81,
+                    b: 10,
+                },
+                RGB {
+                    r: 191,
+                    g: 129,
+                    b: 45,
+                },
+                RGB {
+                    r: 223,
+                    g: 194,
+                    b: 125,
+                },
+                RGB {
+                    r: 246,
+                    g: 232,
+                    b: 195,
+                },
+                RGB {
+                    r: 199,
+                    g: 234,
+                    b: 229,
+                },
+                RGB {
+                    r: 128,
+                    g: 205,
+                    b: 193,
+                },
+                RGB {
+                    r: 53,
+                    g: 151,
+                    b: 143,
+                },
+                RGB {
+                    r: 1,
+                    g: 102,
+                    b: 94,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 140,
+                    g: 81,
+                    b: 10,
+                },
+                RGB {
+                    r: 191,
+                    g: 129,
+                    b: 45,
+                },
+                RGB {
+                    r: 223,
+                    g: 194,
+                    b: 125,
+                },
+                RGB {
+                    r: 246,
+                    g: 232,
+                    b: 195,
+                },
+                RGB {
+                    r: 245,
+                    g: 245,
+                    b: 245,
+                },
+                RGB {
+                    r: 199,
+                    g: 234,
+                    b: 229,
+                },
+                RGB {
+                    r: 128,
+                    g: 205,
+                    b: 193,
+                },
+                RGB {
+                    r: 53,
+                    g: 151,
+                    b: 143,
+                },
+                RGB {
+                    r: 1,
+                    g: 102,
+                    b: 94,
+                },
+            ]),
+            10 => Some(vec![
+                RGB { r: 84, g: 48, b: 5 },
+                RGB {
+                    r: 140,
+                    g: 81,
+                    b: 10,
+                },
+                RGB {
+                    r: 191,
+                    g: 129,
+                    b: 45,
+                },
+                RGB {
+                    r: 223,
+                    g: 194,
+                    b: 125,
+                },
+                RGB {
+                    r: 246,
+                    g: 232,
+                    b: 195,
+                },
+                RGB {
+                    r: 199,
+                    g: 234,
+                    b: 229,
+                },
+                RGB {
+                    r: 128,
+                    g: 205,
+                    b: 193,
+                },
+                RGB {
+                    r: 53,
+                    g: 151,
+                    b: 143,
+                },
+                RGB {
+                    r: 1,
+                    g: 102,
+                    b: 94,
+                },
+                RGB { r: 0, g: 60, b: 48 },
+            ]),
+            11 => Some(vec![
+                RGB { r: 84, g: 48, b: 5 },
+                RGB {
+                    r: 140,
+                    g: 81,
+                    b: 10,
+                },
+                RGB {
+                    r: 191,
+                    g: 129,
+                    b: 45,
+                },
+                RGB {
+                    r: 223,
+                    g: 194,
+                    b: 125,
+                },
+                RGB {
+                    r: 246,
+                    g: 232,
+                    b: 195,
+                },
+                RGB {
+                    r: 245,
+                    g: 245,
+                    b: 245,
+                },
+                RGB {
+                    r: 199,
+                    g: 234,
+                    b: 229,
+                },
+                RGB {
+                    r: 128,
+                    g: 205,
+                    b: 193,
+                },
+                RGB {
+                    r: 53,
+                    g: 151,
+                    b: 143,
+                },
+                RGB {
+                    r: 1,
+                    g: 102,
+                    b: 94,
+                },
+                RGB { r: 0, g: 60, b: 48 },
+            ]),
+            _ => None,
+        },
+        Palette::PRGn => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 175,
+                    g: 141,
+                    b: 195,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 127,
+                    g: 191,
+                    b: 123,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 123,
+                    g: 50,
+                    b: 148,
+                },
+                RGB {
+                    r: 194,
+                    g: 165,
+                    b: 207,
+                },
+                RGB {
+                    r: 166,
+                    g: 219,
+                    b: 160,
+                },
+                RGB {
+                    r: 0,
+                    g: 136,
+                    b: 55,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 123,
+                    g: 50,
+                    b: 148,
+                },
+                RGB {
+                    r: 194,
+                    g: 165,
+                    b: 207,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 166,
+                    g: 219,
+                    b: 160,
+                },
+                RGB {
+                    r: 0,
+                    g: 136,
+                    b: 55,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 118,
+                    g: 42,
+                    b: 131,
+                },
+                RGB {
+                    r: 175,
+                    g: 141,
+                    b: 195,
+                },
+                RGB {
+                    r: 231,
+                    g: 212,
+                    b: 232,
+                },
+                RGB {
+                    r: 217,
+                    g: 240,
+                    b: 211,
+                },
+                RGB {
+                    r: 127,
+                    g: 191,
+                    b: 123,
+                },
+                RGB {
+                    r: 27,
+                    g: 120,
+                    b: 55,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 118,
+                    g: 42,
+                    b: 131,
+                },
+                RGB {
+                    r: 175,
+                    g: 141,
+                    b: 195,
+                },
+                RGB {
+                    r: 231,
+                    g: 212,
+                    b: 232,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 217,
+                    g: 240,
+                    b: 211,
+                },
+                RGB {
+                    r: 127,
+                    g: 191,
+                    b: 123,
+                },
+                RGB {
+                    r: 27,
+                    g: 120,
+                    b: 55,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 118,
+                    g: 42,
+                    b: 131,
+                },
+                RGB {
+                    r: 153,
+                    g: 112,
+                    b: 171,
+                },
+                RGB {
+                    r: 194,
+                    g: 165,
+                    b: 207,
+                },
+                RGB {
+                    r: 231,
+                    g: 212,
+                    b: 232,
+                },
+                RGB {
+                    r: 217,
+                    g: 240,
+                    b: 211,
+                },
+                RGB {
+                    r: 166,
+                    g: 219,
+                    b: 160,
+                },
+                RGB {
+                    r: 90,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 27,
+                    g: 120,
+                    b: 55,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 118,
+                    g: 42,
+                    b: 131,
+                },
+                RGB {
+                    r: 153,
+                    g: 112,
+                    b: 171,
+                },
+                RGB {
+                    r: 194,
+                    g: 165,
+                    b: 207,
+                },
+                RGB {
+                    r: 231,
+                    g: 212,
+                    b: 232,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 217,
+                    g: 240,
+                    b: 211,
+                },
+                RGB {
+                    r: 166,
+                    g: 219,
+                    b: 160,
+                },
+                RGB {
+                    r: 90,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 27,
+                    g: 120,
+                    b: 55,
+                },
+            ]),
+            10 => Some(vec![
+                RGB { r: 64, g: 0, b: 75 },
+                RGB {
+                    r: 118,
+                    g: 42,
+                    b: 131,
+                },
+                RGB {
+                    r: 153,
+                    g: 112,
+                    b: 171,
+                },
+                RGB {
+                    r: 194,
+                    g: 165,
+                    b: 207,
+                },
+                RGB {
+                    r: 231,
+                    g: 212,
+                    b: 232,
+                },
+                RGB {
+                    r: 217,
+                    g: 240,
+                    b: 211,
+                },
+                RGB {
+                    r: 166,
+                    g: 219,
+                    b: 160,
+                },
+                RGB {
+                    r: 90,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 27,
+                    g: 120,
+                    b: 55,
+                },
+                RGB { r: 0, g: 68, b: 27 },
+            ]),
+            11 => Some(vec![
+                RGB { r: 64, g: 0, b: 75 },
+                RGB {
+                    r: 118,
+                    g: 42,
+                    b: 131,
+                },
+                RGB {
+                    r: 153,
+                    g: 112,
+                    b: 171,
+                },
+                RGB {
+                    r: 194,
+                    g: 165,
+                    b: 207,
+                },
+                RGB {
+                    r: 231,
+                    g: 212,
+                    b: 232,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 217,
+                    g: 240,
+                    b: 211,
+                },
+                RGB {
+                    r: 166,
+                    g: 219,
+                    b: 160,
+                },
+                RGB {
+                    r: 90,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 27,
+                    g: 120,
+                    b: 55,
+                },
+                RGB { r: 0, g: 68, b: 27 },
+            ]),
+            _ => None,
+        },
+        Palette::PiYG => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 233,
+                    g: 163,
+                    b: 201,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 161,
+                    g: 215,
+                    b: 106,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 208,
+                    g: 28,
+                    b: 139,
+                },
+                RGB {
+                    r: 241,
+                    g: 182,
+                    b: 218,
+                },
+                RGB {
+                    r: 184,
+                    g: 225,
+                    b: 134,
+                },
+                RGB {
+                    r: 77,
+                    g: 172,
+                    b: 38,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 208,
+                    g: 28,
+                    b: 139,
+                },
+                RGB {
+                    r: 241,
+                    g: 182,
+                    b: 218,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 184,
+                    g: 225,
+                    b: 134,
+                },
+                RGB {
+                    r: 77,
+                    g: 172,
+                    b: 38,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 197,
+                    g: 27,
+                    b: 125,
+                },
+                RGB {
+                    r: 233,
+                    g: 163,
+                    b: 201,
+                },
+                RGB {
+                    r: 253,
+                    g: 224,
+                    b: 239,
+                },
+                RGB {
+                    r: 230,
+                    g: 245,
+                    b: 208,
+                },
+                RGB {
+                    r: 161,
+                    g: 215,
+                    b: 106,
+                },
+                RGB {
+                    r: 77,
+                    g: 146,
+                    b: 33,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 197,
+                    g: 27,
+                    b: 125,
+                },
+                RGB {
+                    r: 233,
+                    g: 163,
+                    b: 201,
+                },
+                RGB {
+                    r: 253,
+                    g: 224,
+                    b: 239,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 230,
+                    g: 245,
+                    b: 208,
+                },
+                RGB {
+                    r: 161,
+                    g: 215,
+                    b: 106,
+                },
+                RGB {
+                    r: 77,
+                    g: 146,
+                    b: 33,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 197,
+                    g: 27,
+                    b: 125,
+                },
+                RGB {
+                    r: 222,
+                    g: 119,
+                    b: 174,
+                },
+                RGB {
+                    r: 241,
+                    g: 182,
+                    b: 218,
+                },
+                RGB {
+                    r: 253,
+                    g: 224,
+                    b: 239,
+                },
+                RGB {
+                    r: 230,
+                    g: 245,
+                    b: 208,
+                },
+                RGB {
+                    r: 184,
+                    g: 225,
+                    b: 134,
+                },
+                RGB {
+                    r: 127,
+                    g: 188,
+                    b: 65,
+                },
+                RGB {
+                    r: 77,
+                    g: 146,
+                    b: 33,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 197,
+                    g: 27,
+                    b: 125,
+                },
+                RGB {
+                    r: 222,
+                    g: 119,
+                    b: 174,
+                },
+                RGB {
+                    r: 241,
+                    g: 182,
+                    b: 218,
+                },
+                RGB {
+                    r: 253,
+                    g: 224,
+                    b: 239,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 230,
+                    g: 245,
+                    b: 208,
+                },
+                RGB {
+                    r: 184,
+                    g: 225,
+                    b: 134,
+                },
+                RGB {
+                    r: 127,
+                    g: 188,
+                    b: 65,
+                },
+                RGB {
+                    r: 77,
+                    g: 146,
+                    b: 33,
+                },
+            ]),
+            10 => Some(vec![
+                RGB {
+                    r: 142,
+                    g: 1,
+                    b: 82,
+                },
+                RGB {
+                    r: 197,
+                    g: 27,
+                    b: 125,
+                },
+                RGB {
+                    r: 222,
+                    g: 119,
+                    b: 174,
+                },
+                RGB {
+                    r: 241,
+                    g: 182,
+                    b: 218,
+                },
+                RGB {
+                    r: 253,
+                    g: 224,
+                    b: 239,
+                },
+                RGB {
+                    r: 230,
+                    g: 245,
+                    b: 208,
+                },
+                RGB {
+                    r: 184,
+                    g: 225,
+                    b: 134,
+                },
+                RGB {
+                    r: 127,
+                    g: 188,
+                    b: 65,
+                },
+                RGB {
+                    r: 77,
+                    g: 146,
+                    b: 33,
+                },
+                RGB {
+                    r: 39,
+                    g: 100,
+                    b: 25,
+                },
+            ]),
+            11 => Some(vec![
+                RGB {
+                    r: 142,
+                    g: 1,
+                    b: 82,
+                },
+                RGB {
+                    r: 197,
+                    g: 27,
+                    b: 125,
+                },
+                RGB {
+                    r: 222,
+                    g: 119,
+                    b: 174,
+                },
+                RGB {
+                    r: 241,
+                    g: 182,
+                    b: 218,
+                },
+                RGB {
+                    r: 253,
+                    g: 224,
+                    b: 239,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 230,
+                    g: 245,
+                    b: 208,
+                },
+                RGB {
+                    r: 184,
+                    g: 225,
+                    b: 134,
+                },
+                RGB {
+                    r: 127,
+                    g: 188,
+                    b: 65,
+                },
+                RGB {
+                    r: 77,
+                    g: 146,
+                    b: 33,
+                },
+                RGB {
+                    r: 39,
+                    g: 100,
+                    b: 25,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::RdBu => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 239,
+                    g: 138,
+                    b: 98,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 103,
+                    g: 169,
+                    b: 207,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 202,
+                    g: 0,
+                    b: 32,
+                },
+                RGB {
+                    r: 244,
+                    g: 165,
+                    b: 130,
+                },
+                RGB {
+                    r: 146,
+                    g: 197,
+                    b: 222,
+                },
+                RGB {
+                    r: 5,
+                    g: 113,
+                    b: 176,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 202,
+                    g: 0,
+                    b: 32,
+                },
+                RGB {
+                    r: 244,
+                    g: 165,
+                    b: 130,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 146,
+                    g: 197,
+                    b: 222,
+                },
+                RGB {
+                    r: 5,
+                    g: 113,
+                    b: 176,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 178,
+                    g: 24,
+                    b: 43,
+                },
+                RGB {
+                    r: 239,
+                    g: 138,
+                    b: 98,
+                },
+                RGB {
+                    r: 253,
+                    g: 219,
+                    b: 199,
+                },
+                RGB {
+                    r: 209,
+                    g: 229,
+                    b: 240,
+                },
+                RGB {
+                    r: 103,
+                    g: 169,
+                    b: 207,
+                },
+                RGB {
+                    r: 33,
+                    g: 102,
+                    b: 172,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 178,
+                    g: 24,
+                    b: 43,
+                },
+                RGB {
+                    r: 239,
+                    g: 138,
+                    b: 98,
+                },
+                RGB {
+                    r: 253,
+                    g: 219,
+                    b: 199,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 209,
+                    g: 229,
+                    b: 240,
+                },
+                RGB {
+                    r: 103,
+                    g: 169,
+                    b: 207,
+                },
+                RGB {
+                    r: 33,
+                    g: 102,
+                    b: 172,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 178,
+                    g: 24,
+                    b: 43,
+                },
+                RGB {
+                    r: 214,
+                    g: 96,
+                    b: 77,
+                },
+                RGB {
+                    r: 244,
+                    g: 165,
+                    b: 130,
+                },
+                RGB {
+                    r: 253,
+                    g: 219,
+                    b: 199,
+                },
+                RGB {
+                    r: 209,
+                    g: 229,
+                    b: 240,
+                },
+                RGB {
+                    r: 146,
+                    g: 197,
+                    b: 222,
+                },
+                RGB {
+                    r: 67,
+                    g: 147,
+                    b: 195,
+                },
+                RGB {
+                    r: 33,
+                    g: 102,
+                    b: 172,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 178,
+                    g: 24,
+                    b: 43,
+                },
+                RGB {
+                    r: 214,
+                    g: 96,
+                    b: 77,
+                },
+                RGB {
+                    r: 244,
+                    g: 165,
+                    b: 130,
+                },
+                RGB {
+                    r: 253,
+                    g: 219,
+                    b: 199,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 209,
+                    g: 229,
+                    b: 240,
+                },
+                RGB {
+                    r: 146,
+                    g: 197,
+                    b: 222,
+                },
+                RGB {
+                    r: 67,
+                    g: 147,
+                    b: 195,
+                },
+                RGB {
+                    r: 33,
+                    g: 102,
+                    b: 172,
+                },
+            ]),
+            10 => Some(vec![
+                RGB {
+                    r: 103,
+                    g: 0,
+                    b: 31,
+                },
+                RGB {
+                    r: 178,
+                    g: 24,
+                    b: 43,
+                },
+                RGB {
+                    r: 214,
+                    g: 96,
+                    b: 77,
+                },
+                RGB {
+                    r: 244,
+                    g: 165,
+                    b: 130,
+                },
+                RGB {
+                    r: 253,
+                    g: 219,
+                    b: 199,
+                },
+                RGB {
+                    r: 209,
+                    g: 229,
+                    b: 240,
+                },
+                RGB {
+                    r: 146,
+                    g: 197,
+                    b: 222,
+                },
+                RGB {
+                    r: 67,
+                    g: 147,
+                    b: 195,
+                },
+                RGB {
+                    r: 33,
+                    g: 102,
+                    b: 172,
+                },
+                RGB { r: 5, g: 48, b: 97 },
+            ]),
+            11 => Some(vec![
+                RGB {
+                    r: 103,
+                    g: 0,
+                    b: 31,
+                },
+                RGB {
+                    r: 178,
+                    g: 24,
+                    b: 43,
+                },
+                RGB {
+                    r: 214,
+                    g: 96,
+                    b: 77,
+                },
+                RGB {
+                    r: 244,
+                    g: 165,
+                    b: 130,
+                },
+                RGB {
+                    r: 253,
+                    g: 219,
+                    b: 199,
+                },
+                RGB {
+                    r: 247,
+                    g: 247,
+                    b: 247,
+                },
+                RGB {
+                    r: 209,
+                    g: 229,
+                    b: 240,
+                },
+                RGB {
+                    r: 146,
+                    g: 197,
+                    b: 222,
+                },
+                RGB {
+                    r: 67,
+                    g: 147,
+                    b: 195,
+                },
+                RGB {
+                    r: 33,
+                    g: 102,
+                    b: 172,
+                },
+                RGB { r: 5, g: 48, b: 97 },
+            ]),
+            _ => None,
+        },
+        Palette::RdGy => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 239,
+                    g: 138,
+                    b: 98,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 255,
+                },
+                RGB {
+                    r: 153,
+                    g: 153,
+                    b: 153,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 202,
+                    g: 0,
+                    b: 32,
+                },
+                RGB {
+                    r: 244,
+                    g: 165,
+                    b: 130,
+                },
+                RGB {
+                    r: 186,
+                    g: 186,
+                    b: 186,
+                },
+                RGB {
+                    r: 64,
+                    g: 64,
+                    b: 64,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 202,
+                    g: 0,
+                    b: 32,
+                },
+                RGB {
+                    r: 244,
+                    g: 165,
+                    b: 130,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 255,
+                },
+                RGB {
+                    r: 186,
+                    g: 186,
+                    b: 186,
+                },
+                RGB {
+                    r: 64,
+                    g: 64,
+                    b: 64,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 178,
+                    g: 24,
+                    b: 43,
+                },
+                RGB {
+                    r: 239,
+                    g: 138,
+                    b: 98,
+                },
+                RGB {
+                    r: 253,
+                    g: 219,
+                    b: 199,
+                },
+                RGB {
+                    r: 224,
+                    g: 224,
+                    b: 224,
+                },
+                RGB {
+                    r: 153,
+                    g: 153,
+                    b: 153,
+                },
+                RGB {
+                    r: 77,
+                    g: 77,
+                    b: 77,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 178,
+                    g: 24,
+                    b: 43,
+                },
+                RGB {
+                    r: 239,
+                    g: 138,
+                    b: 98,
+                },
+                RGB {
+                    r: 253,
+                    g: 219,
+                    b: 199,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 255,
+                },
+                RGB {
+                    r: 224,
+                    g: 224,
+                    b: 224,
+                },
+                RGB {
+                    r: 153,
+                    g: 153,
+                    b: 153,
+                },
+                RGB {
+                    r: 77,
+                    g: 77,
+                    b: 77,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 178,
+                    g: 24,
+                    b: 43,
+                },
+                RGB {
+                    r: 214,
+                    g: 96,
+                    b: 77,
+                },
+                RGB {
+                    r: 244,
+                    g: 165,
+                    b: 130,
+                },
+                RGB {
+                    r: 253,
+                    g: 219,
+                    b: 199,
+                },
+                RGB {
+                    r: 224,
+                    g: 224,
+                    b: 224,
+                },
+                RGB {
+                    r: 186,
+                    g: 186,
+                    b: 186,
+                },
+                RGB {
+                    r: 135,
+                    g: 135,
+                    b: 135,
+                },
+                RGB {
+                    r: 77,
+                    g: 77,
+                    b: 77,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 178,
+                    g: 24,
+                    b: 43,
+                },
+                RGB {
+                    r: 214,
+                    g: 96,
+                    b: 77,
+                },
+                RGB {
+                    r: 244,
+                    g: 165,
+                    b: 130,
+                },
+                RGB {
+                    r: 253,
+                    g: 219,
+                    b: 199,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 255,
+                },
+                RGB {
+                    r: 224,
+                    g: 224,
+                    b: 224,
+                },
+                RGB {
+                    r: 186,
+                    g: 186,
+                    b: 186,
+                },
+                RGB {
+                    r: 135,
+                    g: 135,
+                    b: 135,
+                },
+                RGB {
+                    r: 77,
+                    g: 77,
+                    b: 77,
+                },
+            ]),
+            10 => Some(vec![
+                RGB {
+                    r: 103,
+                    g: 0,
+                    b: 31,
+                },
+                RGB {
+                    r: 178,
+                    g: 24,
+                    b: 43,
+                },
+                RGB {
+                    r: 214,
+                    g: 96,
+                    b: 77,
+                },
+                RGB {
+                    r: 244,
+                    g: 165,
+                    b: 130,
+                },
+                RGB {
+                    r: 253,
+                    g: 219,
+                    b: 199,
+                },
+                RGB {
+                    r: 224,
+                    g: 224,
+                    b: 224,
+                },
+                RGB {
+                    r: 186,
+                    g: 186,
+                    b: 186,
+                },
+                RGB {
+                    r: 135,
+                    g: 135,
+                    b: 135,
+                },
+                RGB {
+                    r: 77,
+                    g: 77,
+                    b: 77,
+                },
+                RGB {
+                    r: 26,
+                    g: 26,
+                    b: 26,
+                },
+            ]),
+            11 => Some(vec![
+                RGB {
+                    r: 103,
+                    g: 0,
+                    b: 31,
+                },
+                RGB {
+                    r: 178,
+                    g: 24,
+                    b: 43,
+                },
+                RGB {
+                    r: 214,
+                    g: 96,
+                    b: 77,
+                },
+                RGB {
+                    r: 244,
+                    g: 165,
+                    b: 130,
+                },
+                RGB {
+                    r: 253,
+                    g: 219,
+                    b: 199,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 255,
+                },
+                RGB {
+                    r: 224,
+                    g: 224,
+                    b: 224,
+                },
+                RGB {
+                    r: 186,
+                    g: 186,
+                    b: 186,
+                },
+                RGB {
+                    r: 135,
+                    g: 135,
+                    b: 135,
+                },
+                RGB {
+                    r: 77,
+                    g: 77,
+                    b: 77,
+                },
+                RGB {
+                    r: 26,
+                    g: 26,
+                    b: 26,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::RdYlBu => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 89,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 191,
+                },
+                RGB {
+                    r: 145,
+                    g: 191,
+                    b: 219,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 215,
+                    g: 25,
+                    b: 28,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 171,
+                    g: 217,
+                    b: 233,
+                },
+                RGB {
+                    r: 44,
+                    g: 123,
+                    b: 182,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 215,
+                    g: 25,
+                    b: 28,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 191,
+                },
+                RGB {
+                    r: 171,
+                    g: 217,
+                    b: 233,
+                },
+                RGB {
+                    r: 44,
+                    g: 123,
+                    b: 182,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 215,
+                    g: 48,
+                    b: 39,
+                },
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 89,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 144,
+                },
+                RGB {
+                    r: 224,
+                    g: 243,
+                    b: 248,
+                },
+                RGB {
+                    r: 145,
+                    g: 191,
+                    b: 219,
+                },
+                RGB {
+                    r: 69,
+                    g: 117,
+                    b: 180,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 215,
+                    g: 48,
+                    b: 39,
+                },
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 89,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 144,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 191,
+                },
+                RGB {
+                    r: 224,
+                    g: 243,
+                    b: 248,
+                },
+                RGB {
+                    r: 145,
+                    g: 191,
+                    b: 219,
+                },
+                RGB {
+                    r: 69,
+                    g: 117,
+                    b: 180,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 215,
+                    g: 48,
+                    b: 39,
+                },
+                RGB {
+                    r: 244,
+                    g: 109,
+                    b: 67,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 144,
+                },
+                RGB {
+                    r: 224,
+                    g: 243,
+                    b: 248,
+                },
+                RGB {
+                    r: 171,
+                    g: 217,
+                    b: 233,
+                },
+                RGB {
+                    r: 116,
+                    g: 173,
+                    b: 209,
+                },
+                RGB {
+                    r: 69,
+                    g: 117,
+                    b: 180,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 215,
+                    g: 48,
+                    b: 39,
+                },
+                RGB {
+                    r: 244,
+                    g: 109,
+                    b: 67,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 144,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 191,
+                },
+                RGB {
+                    r: 224,
+                    g: 243,
+                    b: 248,
+                },
+                RGB {
+                    r: 171,
+                    g: 217,
+                    b: 233,
+                },
+                RGB {
+                    r: 116,
+                    g: 173,
+                    b: 209,
+                },
+                RGB {
+                    r: 69,
+                    g: 117,
+                    b: 180,
+                },
+            ]),
+            10 => Some(vec![
+                RGB {
+                    r: 165,
+                    g: 0,
+                    b: 38,
+                },
+                RGB {
+                    r: 215,
+                    g: 48,
+                    b: 39,
+                },
+                RGB {
+                    r: 244,
+                    g: 109,
+                    b: 67,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 144,
+                },
+                RGB {
+                    r: 224,
+                    g: 243,
+                    b: 248,
+                },
+                RGB {
+                    r: 171,
+                    g: 217,
+                    b: 233,
+                },
+                RGB {
+                    r: 116,
+                    g: 173,
+                    b: 209,
+                },
+                RGB {
+                    r: 69,
+                    g: 117,
+                    b: 180,
+                },
+                RGB {
+                    r: 49,
+                    g: 54,
+                    b: 149,
+                },
+            ]),
+            11 => Some(vec![
+                RGB {
+                    r: 165,
+                    g: 0,
+                    b: 38,
+                },
+                RGB {
+                    r: 215,
+                    g: 48,
+                    b: 39,
+                },
+                RGB {
+                    r: 244,
+                    g: 109,
+                    b: 67,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 144,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 191,
+                },
+                RGB {
+                    r: 224,
+                    g: 243,
+                    b: 248,
+                },
+                RGB {
+                    r: 171,
+                    g: 217,
+                    b: 233,
+                },
+                RGB {
+                    r: 116,
+                    g: 173,
+                    b: 209,
+                },
+                RGB {
+                    r: 69,
+                    g: 117,
+                    b: 180,
+                },
+                RGB {
+                    r: 49,
+                    g: 54,
+                    b: 149,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::Spectral => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 89,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 191,
+                },
+                RGB {
+                    r: 153,
+                    g: 213,
+                    b: 148,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 215,
+                    g: 25,
+                    b: 28,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 171,
+                    g: 221,
+                    b: 164,
+                },
+                RGB {
+                    r: 43,
+                    g: 131,
+                    b: 186,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 215,
+                    g: 25,
+                    b: 28,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 191,
+                },
+                RGB {
+                    r: 171,
+                    g: 221,
+                    b: 164,
+                },
+                RGB {
+                    r: 43,
+                    g: 131,
+                    b: 186,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 213,
+                    g: 62,
+                    b: 79,
+                },
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 89,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 139,
+                },
+                RGB {
+                    r: 230,
+                    g: 245,
+                    b: 152,
+                },
+                RGB {
+                    r: 153,
+                    g: 213,
+                    b: 148,
+                },
+                RGB {
+                    r: 50,
+                    g: 136,
+                    b: 189,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 213,
+                    g: 62,
+                    b: 79,
+                },
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 89,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 139,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 191,
+                },
+                RGB {
+                    r: 230,
+                    g: 245,
+                    b: 152,
+                },
+                RGB {
+                    r: 153,
+                    g: 213,
+                    b: 148,
+                },
+                RGB {
+                    r: 50,
+                    g: 136,
+                    b: 189,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 213,
+                    g: 62,
+                    b: 79,
+                },
+                RGB {
+                    r: 244,
+                    g: 109,
+                    b: 67,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 139,
+                },
+                RGB {
+                    r: 230,
+                    g: 245,
+                    b: 152,
+                },
+                RGB {
+                    r: 171,
+                    g: 221,
+                    b: 164,
+                },
+                RGB {
+                    r: 102,
+                    g: 194,
+                    b: 165,
+                },
+                RGB {
+                    r: 50,
+                    g: 136,
+                    b: 189,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 213,
+                    g: 62,
+                    b: 79,
+                },
+                RGB {
+                    r: 244,
+                    g: 109,
+                    b: 67,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 139,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 191,
+                },
+                RGB {
+                    r: 230,
+                    g: 245,
+                    b: 152,
+                },
+                RGB {
+                    r: 171,
+                    g: 221,
+                    b: 164,
+                },
+                RGB {
+                    r: 102,
+                    g: 194,
+                    b: 165,
+                },
+                RGB {
+                    r: 50,
+                    g: 136,
+                    b: 189,
+                },
+            ]),
+            10 => Some(vec![
+                RGB {
+                    r: 158,
+                    g: 1,
+                    b: 66,
+                },
+                RGB {
+                    r: 213,
+                    g: 62,
+                    b: 79,
+                },
+                RGB {
+                    r: 244,
+                    g: 109,
+                    b: 67,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 139,
+                },
+                RGB {
+                    r: 230,
+                    g: 245,
+                    b: 152,
+                },
+                RGB {
+                    r: 171,
+                    g: 221,
+                    b: 164,
+                },
+                RGB {
+                    r: 102,
+                    g: 194,
+                    b: 165,
+                },
+                RGB {
+                    r: 50,
+                    g: 136,
+                    b: 189,
+                },
+                RGB {
+                    r: 94,
+                    g: 79,
+                    b: 162,
+                },
+            ]),
+            11 => Some(vec![
+                RGB {
+                    r: 158,
+                    g: 1,
+                    b: 66,
+                },
+                RGB {
+                    r: 213,
+                    g: 62,
+                    b: 79,
+                },
+                RGB {
+                    r: 244,
+                    g: 109,
+                    b: 67,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 139,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 191,
+                },
+                RGB {
+                    r: 230,
+                    g: 245,
+                    b: 152,
+                },
+                RGB {
+                    r: 171,
+                    g: 221,
+                    b: 164,
+                },
+                RGB {
+                    r: 102,
+                    g: 194,
+                    b: 165,
+                },
+                RGB {
+                    r: 50,
+                    g: 136,
+                    b: 189,
+                },
+                RGB {
+                    r: 94,
+                    g: 79,
+                    b: 162,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::RdYlGn => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 89,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 191,
+                },
+                RGB {
+                    r: 145,
+                    g: 207,
+                    b: 96,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 215,
+                    g: 25,
+                    b: 28,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 166,
+                    g: 217,
+                    b: 106,
+                },
+                RGB {
+                    r: 26,
+                    g: 150,
+                    b: 65,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 215,
+                    g: 25,
+                    b: 28,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 191,
+                },
+                RGB {
+                    r: 166,
+                    g: 217,
+                    b: 106,
+                },
+                RGB {
+                    r: 26,
+                    g: 150,
+                    b: 65,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 215,
+                    g: 48,
+                    b: 39,
+                },
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 89,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 139,
+                },
+                RGB {
+                    r: 217,
+                    g: 239,
+                    b: 139,
+                },
+                RGB {
+                    r: 145,
+                    g: 207,
+                    b: 96,
+                },
+                RGB {
+                    r: 26,
+                    g: 152,
+                    b: 80,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 215,
+                    g: 48,
+                    b: 39,
+                },
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 89,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 139,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 191,
+                },
+                RGB {
+                    r: 217,
+                    g: 239,
+                    b: 139,
+                },
+                RGB {
+                    r: 145,
+                    g: 207,
+                    b: 96,
+                },
+                RGB {
+                    r: 26,
+                    g: 152,
+                    b: 80,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 215,
+                    g: 48,
+                    b: 39,
+                },
+                RGB {
+                    r: 244,
+                    g: 109,
+                    b: 67,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 139,
+                },
+                RGB {
+                    r: 217,
+                    g: 239,
+                    b: 139,
+                },
+                RGB {
+                    r: 166,
+                    g: 217,
+                    b: 106,
+                },
+                RGB {
+                    r: 102,
+                    g: 189,
+                    b: 99,
+                },
+                RGB {
+                    r: 26,
+                    g: 152,
+                    b: 80,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 215,
+                    g: 48,
+                    b: 39,
+                },
+                RGB {
+                    r: 244,
+                    g: 109,
+                    b: 67,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 139,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 191,
+                },
+                RGB {
+                    r: 217,
+                    g: 239,
+                    b: 139,
+                },
+                RGB {
+                    r: 166,
+                    g: 217,
+                    b: 106,
+                },
+                RGB {
+                    r: 102,
+                    g: 189,
+                    b: 99,
+                },
+                RGB {
+                    r: 26,
+                    g: 152,
+                    b: 80,
+                },
+            ]),
+            10 => Some(vec![
+                RGB {
+                    r: 165,
+                    g: 0,
+                    b: 38,
+                },
+                RGB {
+                    r: 215,
+                    g: 48,
+                    b: 39,
+                },
+                RGB {
+                    r: 244,
+                    g: 109,
+                    b: 67,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 139,
+                },
+                RGB {
+                    r: 217,
+                    g: 239,
+                    b: 139,
+                },
+                RGB {
+                    r: 166,
+                    g: 217,
+                    b: 106,
+                },
+                RGB {
+                    r: 102,
+                    g: 189,
+                    b: 99,
+                },
+                RGB {
+                    r: 26,
+                    g: 152,
+                    b: 80,
+                },
+                RGB {
+                    r: 0,
+                    g: 104,
+                    b: 55,
+                },
+            ]),
+            11 => Some(vec![
+                RGB {
+                    r: 165,
+                    g: 0,
+                    b: 38,
+                },
+                RGB {
+                    r: 215,
+                    g: 48,
+                    b: 39,
+                },
+                RGB {
+                    r: 244,
+                    g: 109,
+                    b: 67,
+                },
+                RGB {
+                    r: 253,
+                    g: 174,
+                    b: 97,
+                },
+                RGB {
+                    r: 254,
+                    g: 224,
+                    b: 139,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 191,
+                },
+                RGB {
+                    r: 217,
+                    g: 239,
+                    b: 139,
+                },
+                RGB {
+                    r: 166,
+                    g: 217,
+                    b: 106,
+                },
+                RGB {
+                    r: 102,
+                    g: 189,
+                    b: 99,
+                },
+                RGB {
+                    r: 26,
+                    g: 152,
+                    b: 80,
+                },
+                RGB {
+                    r: 0,
+                    g: 104,
+                    b: 55,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::Accent => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 127,
+                    g: 201,
+                    b: 127,
+                },
+                RGB {
+                    r: 190,
+                    g: 174,
+                    b: 212,
+                },
+                RGB {
+                    r: 253,
+                    g: 192,
+                    b: 134,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 127,
+                    g: 201,
+                    b: 127,
+                },
+                RGB {
+                    r: 190,
+                    g: 174,
+                    b: 212,
+                },
+                RGB {
+                    r: 253,
+                    g: 192,
+                    b: 134,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 153,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 127,
+                    g: 201,
+                    b: 127,
+                },
+                RGB {
+                    r: 190,
+                    g: 174,
+                    b: 212,
+                },
+                RGB {
+                    r: 253,
+                    g: 192,
+                    b: 134,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 153,
+                },
+                RGB {
+                    r: 56,
+                    g: 108,
+                    b: 176,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 127,
+                    g: 201,
+                    b: 127,
+                },
+                RGB {
+                    r: 190,
+                    g: 174,
+                    b: 212,
+                },
+                RGB {
+                    r: 253,
+                    g: 192,
+                    b: 134,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 153,
+                },
+                RGB {
+                    r: 56,
+                    g: 108,
+                    b: 176,
+                },
+                RGB {
+                    r: 240,
+                    g: 2,
+                    b: 127,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 127,
+                    g: 201,
+                    b: 127,
+                },
+                RGB {
+                    r: 190,
+                    g: 174,
+                    b: 212,
+                },
+                RGB {
+                    r: 253,
+                    g: 192,
+                    b: 134,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 153,
+                },
+                RGB {
+                    r: 56,
+                    g: 108,
+                    b: 176,
+                },
+                RGB {
+                    r: 240,
+                    g: 2,
+                    b: 127,
+                },
+                RGB {
+                    r: 191,
+                    g: 91,
+                    b: 23,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 127,
+                    g: 201,
+                    b: 127,
+                },
+                RGB {
+                    r: 190,
+                    g: 174,
+                    b: 212,
+                },
+                RGB {
+                    r: 253,
+                    g: 192,
+                    b: 134,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 153,
+                },
+                RGB {
+                    r: 56,
+                    g: 108,
+                    b: 176,
+                },
+                RGB {
+                    r: 240,
+                    g: 2,
+                    b: 127,
+                },
+                RGB {
+                    r: 191,
+                    g: 91,
+                    b: 23,
+                },
+                RGB {
+                    r: 102,
+                    g: 102,
+                    b: 102,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::Dark2 => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 27,
+                    g: 158,
+                    b: 119,
+                },
+                RGB {
+                    r: 217,
+                    g: 95,
+                    b: 2,
+                },
+                RGB {
+                    r: 117,
+                    g: 112,
+                    b: 179,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 27,
+                    g: 158,
+                    b: 119,
+                },
+                RGB {
+                    r: 217,
+                    g: 95,
+                    b: 2,
+                },
+                RGB {
+                    r: 117,
+                    g: 112,
+                    b: 179,
+                },
+                RGB {
+                    r: 231,
+                    g: 41,
+                    b: 138,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 27,
+                    g: 158,
+                    b: 119,
+                },
+                RGB {
+                    r: 217,
+                    g: 95,
+                    b: 2,
+                },
+                RGB {
+                    r: 117,
+                    g: 112,
+                    b: 179,
+                },
+                RGB {
+                    r: 231,
+                    g: 41,
+                    b: 138,
+                },
+                RGB {
+                    r: 102,
+                    g: 166,
+                    b: 30,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 27,
+                    g: 158,
+                    b: 119,
+                },
+                RGB {
+                    r: 217,
+                    g: 95,
+                    b: 2,
+                },
+                RGB {
+                    r: 117,
+                    g: 112,
+                    b: 179,
+                },
+                RGB {
+                    r: 231,
+                    g: 41,
+                    b: 138,
+                },
+                RGB {
+                    r: 102,
+                    g: 166,
+                    b: 30,
+                },
+                RGB {
+                    r: 230,
+                    g: 171,
+                    b: 2,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 27,
+                    g: 158,
+                    b: 119,
+                },
+                RGB {
+                    r: 217,
+                    g: 95,
+                    b: 2,
+                },
+                RGB {
+                    r: 117,
+                    g: 112,
+                    b: 179,
+                },
+                RGB {
+                    r: 231,
+                    g: 41,
+                    b: 138,
+                },
+                RGB {
+                    r: 102,
+                    g: 166,
+                    b: 30,
+                },
+                RGB {
+                    r: 230,
+                    g: 171,
+                    b: 2,
+                },
+                RGB {
+                    r: 166,
+                    g: 118,
+                    b: 29,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 27,
+                    g: 158,
+                    b: 119,
+                },
+                RGB {
+                    r: 217,
+                    g: 95,
+                    b: 2,
+                },
+                RGB {
+                    r: 117,
+                    g: 112,
+                    b: 179,
+                },
+                RGB {
+                    r: 231,
+                    g: 41,
+                    b: 138,
+                },
+                RGB {
+                    r: 102,
+                    g: 166,
+                    b: 30,
+                },
+                RGB {
+                    r: 230,
+                    g: 171,
+                    b: 2,
+                },
+                RGB {
+                    r: 166,
+                    g: 118,
+                    b: 29,
+                },
+                RGB {
+                    r: 102,
+                    g: 102,
+                    b: 102,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::Paired => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 166,
+                    g: 206,
+                    b: 227,
+                },
+                RGB {
+                    r: 31,
+                    g: 120,
+                    b: 180,
+                },
+                RGB {
+                    r: 178,
+                    g: 223,
+                    b: 138,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 166,
+                    g: 206,
+                    b: 227,
+                },
+                RGB {
+                    r: 31,
+                    g: 120,
+                    b: 180,
+                },
+                RGB {
+                    r: 178,
+                    g: 223,
+                    b: 138,
+                },
+                RGB {
+                    r: 51,
+                    g: 160,
+                    b: 44,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 166,
+                    g: 206,
+                    b: 227,
+                },
+                RGB {
+                    r: 31,
+                    g: 120,
+                    b: 180,
+                },
+                RGB {
+                    r: 178,
+                    g: 223,
+                    b: 138,
+                },
+                RGB {
+                    r: 51,
+                    g: 160,
+                    b: 44,
+                },
+                RGB {
+                    r: 251,
+                    g: 154,
+                    b: 153,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 166,
+                    g: 206,
+                    b: 227,
+                },
+                RGB {
+                    r: 31,
+                    g: 120,
+                    b: 180,
+                },
+                RGB {
+                    r: 178,
+                    g: 223,
+                    b: 138,
+                },
+                RGB {
+                    r: 51,
+                    g: 160,
+                    b: 44,
+                },
+                RGB {
+                    r: 251,
+                    g: 154,
+                    b: 153,
+                },
+                RGB {
+                    r: 227,
+                    g: 26,
+                    b: 28,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 166,
+                    g: 206,
+                    b: 227,
+                },
+                RGB {
+                    r: 31,
+                    g: 120,
+                    b: 180,
+                },
+                RGB {
+                    r: 178,
+                    g: 223,
+                    b: 138,
+                },
+                RGB {
+                    r: 51,
+                    g: 160,
+                    b: 44,
+                },
+                RGB {
+                    r: 251,
+                    g: 154,
+                    b: 153,
+                },
+                RGB {
+                    r: 227,
+                    g: 26,
+                    b: 28,
+                },
+                RGB {
+                    r: 253,
+                    g: 191,
+                    b: 111,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 166,
+                    g: 206,
+                    b: 227,
+                },
+                RGB {
+                    r: 31,
+                    g: 120,
+                    b: 180,
+                },
+                RGB {
+                    r: 178,
+                    g: 223,
+                    b: 138,
+                },
+                RGB {
+                    r: 51,
+                    g: 160,
+                    b: 44,
+                },
+                RGB {
+                    r: 251,
+                    g: 154,
+                    b: 153,
+                },
+                RGB {
+                    r: 227,
+                    g: 26,
+                    b: 28,
+                },
+                RGB {
+                    r: 253,
+                    g: 191,
+                    b: 111,
+                },
+                RGB {
+                    r: 255,
+                    g: 127,
+                    b: 0,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 166,
+                    g: 206,
+                    b: 227,
+                },
+                RGB {
+                    r: 31,
+                    g: 120,
+                    b: 180,
+                },
+                RGB {
+                    r: 178,
+                    g: 223,
+                    b: 138,
+                },
+                RGB {
+                    r: 51,
+                    g: 160,
+                    b: 44,
+                },
+                RGB {
+                    r: 251,
+                    g: 154,
+                    b: 153,
+                },
+                RGB {
+                    r: 227,
+                    g: 26,
+                    b: 28,
+                },
+                RGB {
+                    r: 253,
+                    g: 191,
+                    b: 111,
+                },
+                RGB {
+                    r: 255,
+                    g: 127,
+                    b: 0,
+                },
+                RGB {
+                    r: 202,
+                    g: 178,
+                    b: 214,
+                },
+            ]),
+            10 => Some(vec![
+                RGB {
+                    r: 166,
+                    g: 206,
+                    b: 227,
+                },
+                RGB {
+                    r: 31,
+                    g: 120,
+                    b: 180,
+                },
+                RGB {
+                    r: 178,
+                    g: 223,
+                    b: 138,
+                },
+                RGB {
+                    r: 51,
+                    g: 160,
+                    b: 44,
+                },
+                RGB {
+                    r: 251,
+                    g: 154,
+                    b: 153,
+                },
+                RGB {
+                    r: 227,
+                    g: 26,
+                    b: 28,
+                },
+                RGB {
+                    r: 253,
+                    g: 191,
+                    b: 111,
+                },
+                RGB {
+                    r: 255,
+                    g: 127,
+                    b: 0,
+                },
+                RGB {
+                    r: 202,
+                    g: 178,
+                    b: 214,
+                },
+                RGB {
+                    r: 106,
+                    g: 61,
+                    b: 154,
+                },
+            ]),
+            11 => Some(vec![
+                RGB {
+                    r: 166,
+                    g: 206,
+                    b: 227,
+                },
+                RGB {
+                    r: 31,
+                    g: 120,
+                    b: 180,
+                },
+                RGB {
+                    r: 178,
+                    g: 223,
+                    b: 138,
+                },
+                RGB {
+                    r: 51,
+                    g: 160,
+                    b: 44,
+                },
+                RGB {
+                    r: 251,
+                    g: 154,
+                    b: 153,
+                },
+                RGB {
+                    r: 227,
+                    g: 26,
+                    b: 28,
+                },
+                RGB {
+                    r: 253,
+                    g: 191,
+                    b: 111,
+                },
+                RGB {
+                    r: 255,
+                    g: 127,
+                    b: 0,
+                },
+                RGB {
+                    r: 202,
+                    g: 178,
+                    b: 214,
+                },
+                RGB {
+                    r: 106,
+                    g: 61,
+                    b: 154,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 153,
+                },
+            ]),
+            12 => Some(vec![
+                RGB {
+                    r: 166,
+                    g: 206,
+                    b: 227,
+                },
+                RGB {
+                    r: 31,
+                    g: 120,
+                    b: 180,
+                },
+                RGB {
+                    r: 178,
+                    g: 223,
+                    b: 138,
+                },
+                RGB {
+                    r: 51,
+                    g: 160,
+                    b: 44,
+                },
+                RGB {
+                    r: 251,
+                    g: 154,
+                    b: 153,
+                },
+                RGB {
+                    r: 227,
+                    g: 26,
+                    b: 28,
+                },
+                RGB {
+                    r: 253,
+                    g: 191,
+                    b: 111,
+                },
+                RGB {
+                    r: 255,
+                    g: 127,
+                    b: 0,
+                },
+                RGB {
+                    r: 202,
+                    g: 178,
+                    b: 214,
+                },
+                RGB {
+                    r: 106,
+                    g: 61,
+                    b: 154,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 153,
+                },
+                RGB {
+                    r: 177,
+                    g: 89,
+                    b: 40,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::Pastel1 => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 251,
+                    g: 180,
+                    b: 174,
+                },
+                RGB {
+                    r: 179,
+                    g: 205,
+                    b: 227,
+                },
+                RGB {
+                    r: 204,
+                    g: 235,
+                    b: 197,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 251,
+                    g: 180,
+                    b: 174,
+                },
+                RGB {
+                    r: 179,
+                    g: 205,
+                    b: 227,
+                },
+                RGB {
+                    r: 204,
+                    g: 235,
+                    b: 197,
+                },
+                RGB {
+                    r: 222,
+                    g: 203,
+                    b: 228,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 251,
+                    g: 180,
+                    b: 174,
+                },
+                RGB {
+                    r: 179,
+                    g: 205,
+                    b: 227,
+                },
+                RGB {
+                    r: 204,
+                    g: 235,
+                    b: 197,
+                },
+                RGB {
+                    r: 222,
+                    g: 203,
+                    b: 228,
+                },
+                RGB {
+                    r: 254,
+                    g: 217,
+                    b: 166,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 251,
+                    g: 180,
+                    b: 174,
+                },
+                RGB {
+                    r: 179,
+                    g: 205,
+                    b: 227,
+                },
+                RGB {
+                    r: 204,
+                    g: 235,
+                    b: 197,
+                },
+                RGB {
+                    r: 222,
+                    g: 203,
+                    b: 228,
+                },
+                RGB {
+                    r: 254,
+                    g: 217,
+                    b: 166,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 204,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 251,
+                    g: 180,
+                    b: 174,
+                },
+                RGB {
+                    r: 179,
+                    g: 205,
+                    b: 227,
+                },
+                RGB {
+                    r: 204,
+                    g: 235,
+                    b: 197,
+                },
+                RGB {
+                    r: 222,
+                    g: 203,
+                    b: 228,
+                },
+                RGB {
+                    r: 254,
+                    g: 217,
+                    b: 166,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 204,
+                },
+                RGB {
+                    r: 229,
+                    g: 216,
+                    b: 189,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 251,
+                    g: 180,
+                    b: 174,
+                },
+                RGB {
+                    r: 179,
+                    g: 205,
+                    b: 227,
+                },
+                RGB {
+                    r: 204,
+                    g: 235,
+                    b: 197,
+                },
+                RGB {
+                    r: 222,
+                    g: 203,
+                    b: 228,
+                },
+                RGB {
+                    r: 254,
+                    g: 217,
+                    b: 166,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 204,
+                },
+                RGB {
+                    r: 229,
+                    g: 216,
+                    b: 189,
+                },
+                RGB {
+                    r: 253,
+                    g: 218,
+                    b: 236,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 251,
+                    g: 180,
+                    b: 174,
+                },
+                RGB {
+                    r: 179,
+                    g: 205,
+                    b: 227,
+                },
+                RGB {
+                    r: 204,
+                    g: 235,
+                    b: 197,
+                },
+                RGB {
+                    r: 222,
+                    g: 203,
+                    b: 228,
+                },
+                RGB {
+                    r: 254,
+                    g: 217,
+                    b: 166,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 204,
+                },
+                RGB {
+                    r: 229,
+                    g: 216,
+                    b: 189,
+                },
+                RGB {
+                    r: 253,
+                    g: 218,
+                    b: 236,
+                },
+                RGB {
+                    r: 242,
+                    g: 242,
+                    b: 242,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::Pastel2 => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 179,
+                    g: 226,
+                    b: 205,
+                },
+                RGB {
+                    r: 253,
+                    g: 205,
+                    b: 172,
+                },
+                RGB {
+                    r: 203,
+                    g: 213,
+                    b: 232,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 179,
+                    g: 226,
+                    b: 205,
+                },
+                RGB {
+                    r: 253,
+                    g: 205,
+                    b: 172,
+                },
+                RGB {
+                    r: 203,
+                    g: 213,
+                    b: 232,
+                },
+                RGB {
+                    r: 244,
+                    g: 202,
+                    b: 228,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 179,
+                    g: 226,
+                    b: 205,
+                },
+                RGB {
+                    r: 253,
+                    g: 205,
+                    b: 172,
+                },
+                RGB {
+                    r: 203,
+                    g: 213,
+                    b: 232,
+                },
+                RGB {
+                    r: 244,
+                    g: 202,
+                    b: 228,
+                },
+                RGB {
+                    r: 230,
+                    g: 245,
+                    b: 201,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 179,
+                    g: 226,
+                    b: 205,
+                },
+                RGB {
+                    r: 253,
+                    g: 205,
+                    b: 172,
+                },
+                RGB {
+                    r: 203,
+                    g: 213,
+                    b: 232,
+                },
+                RGB {
+                    r: 244,
+                    g: 202,
+                    b: 228,
+                },
+                RGB {
+                    r: 230,
+                    g: 245,
+                    b: 201,
+                },
+                RGB {
+                    r: 255,
+                    g: 242,
+                    b: 174,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 179,
+                    g: 226,
+                    b: 205,
+                },
+                RGB {
+                    r: 253,
+                    g: 205,
+                    b: 172,
+                },
+                RGB {
+                    r: 203,
+                    g: 213,
+                    b: 232,
+                },
+                RGB {
+                    r: 244,
+                    g: 202,
+                    b: 228,
+                },
+                RGB {
+                    r: 230,
+                    g: 245,
+                    b: 201,
+                },
+                RGB {
+                    r: 255,
+                    g: 242,
+                    b: 174,
+                },
+                RGB {
+                    r: 241,
+                    g: 226,
+                    b: 204,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 179,
+                    g: 226,
+                    b: 205,
+                },
+                RGB {
+                    r: 253,
+                    g: 205,
+                    b: 172,
+                },
+                RGB {
+                    r: 203,
+                    g: 213,
+                    b: 232,
+                },
+                RGB {
+                    r: 244,
+                    g: 202,
+                    b: 228,
+                },
+                RGB {
+                    r: 230,
+                    g: 245,
+                    b: 201,
+                },
+                RGB {
+                    r: 255,
+                    g: 242,
+                    b: 174,
+                },
+                RGB {
+                    r: 241,
+                    g: 226,
+                    b: 204,
+                },
+                RGB {
+                    r: 204,
+                    g: 204,
+                    b: 204,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::Set1 => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 228,
+                    g: 26,
+                    b: 28,
+                },
+                RGB {
+                    r: 55,
+                    g: 126,
+                    b: 184,
+                },
+                RGB {
+                    r: 77,
+                    g: 175,
+                    b: 74,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 228,
+                    g: 26,
+                    b: 28,
+                },
+                RGB {
+                    r: 55,
+                    g: 126,
+                    b: 184,
+                },
+                RGB {
+                    r: 77,
+                    g: 175,
+                    b: 74,
+                },
+                RGB {
+                    r: 152,
+                    g: 78,
+                    b: 163,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 228,
+                    g: 26,
+                    b: 28,
+                },
+                RGB {
+                    r: 55,
+                    g: 126,
+                    b: 184,
+                },
+                RGB {
+                    r: 77,
+                    g: 175,
+                    b: 74,
+                },
+                RGB {
+                    r: 152,
+                    g: 78,
+                    b: 163,
+                },
+                RGB {
+                    r: 255,
+                    g: 127,
+                    b: 0,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 228,
+                    g: 26,
+                    b: 28,
+                },
+                RGB {
+                    r: 55,
+                    g: 126,
+                    b: 184,
+                },
+                RGB {
+                    r: 77,
+                    g: 175,
+                    b: 74,
+                },
+                RGB {
+                    r: 152,
+                    g: 78,
+                    b: 163,
+                },
+                RGB {
+                    r: 255,
+                    g: 127,
+                    b: 0,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 51,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 228,
+                    g: 26,
+                    b: 28,
+                },
+                RGB {
+                    r: 55,
+                    g: 126,
+                    b: 184,
+                },
+                RGB {
+                    r: 77,
+                    g: 175,
+                    b: 74,
+                },
+                RGB {
+                    r: 152,
+                    g: 78,
+                    b: 163,
+                },
+                RGB {
+                    r: 255,
+                    g: 127,
+                    b: 0,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 51,
+                },
+                RGB {
+                    r: 166,
+                    g: 86,
+                    b: 40,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 228,
+                    g: 26,
+                    b: 28,
+                },
+                RGB {
+                    r: 55,
+                    g: 126,
+                    b: 184,
+                },
+                RGB {
+                    r: 77,
+                    g: 175,
+                    b: 74,
+                },
+                RGB {
+                    r: 152,
+                    g: 78,
+                    b: 163,
+                },
+                RGB {
+                    r: 255,
+                    g: 127,
+                    b: 0,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 51,
+                },
+                RGB {
+                    r: 166,
+                    g: 86,
+                    b: 40,
+                },
+                RGB {
+                    r: 247,
+                    g: 129,
+                    b: 191,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 228,
+                    g: 26,
+                    b: 28,
+                },
+                RGB {
+                    r: 55,
+                    g: 126,
+                    b: 184,
+                },
+                RGB {
+                    r: 77,
+                    g: 175,
+                    b: 74,
+                },
+                RGB {
+                    r: 152,
+                    g: 78,
+                    b: 163,
+                },
+                RGB {
+                    r: 255,
+                    g: 127,
+                    b: 0,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 51,
+                },
+                RGB {
+                    r: 166,
+                    g: 86,
+                    b: 40,
+                },
+                RGB {
+                    r: 247,
+                    g: 129,
+                    b: 191,
+                },
+                RGB {
+                    r: 153,
+                    g: 153,
+                    b: 153,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::Set2 => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 102,
+                    g: 194,
+                    b: 165,
+                },
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 98,
+                },
+                RGB {
+                    r: 141,
+                    g: 160,
+                    b: 203,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 102,
+                    g: 194,
+                    b: 165,
+                },
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 98,
+                },
+                RGB {
+                    r: 141,
+                    g: 160,
+                    b: 203,
+                },
+                RGB {
+                    r: 231,
+                    g: 138,
+                    b: 195,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 102,
+                    g: 194,
+                    b: 165,
+                },
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 98,
+                },
+                RGB {
+                    r: 141,
+                    g: 160,
+                    b: 203,
+                },
+                RGB {
+                    r: 231,
+                    g: 138,
+                    b: 195,
+                },
+                RGB {
+                    r: 166,
+                    g: 216,
+                    b: 84,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 102,
+                    g: 194,
+                    b: 165,
+                },
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 98,
+                },
+                RGB {
+                    r: 141,
+                    g: 160,
+                    b: 203,
+                },
+                RGB {
+                    r: 231,
+                    g: 138,
+                    b: 195,
+                },
+                RGB {
+                    r: 166,
+                    g: 216,
+                    b: 84,
+                },
+                RGB {
+                    r: 255,
+                    g: 217,
+                    b: 47,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 102,
+                    g: 194,
+                    b: 165,
+                },
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 98,
+                },
+                RGB {
+                    r: 141,
+                    g: 160,
+                    b: 203,
+                },
+                RGB {
+                    r: 231,
+                    g: 138,
+                    b: 195,
+                },
+                RGB {
+                    r: 166,
+                    g: 216,
+                    b: 84,
+                },
+                RGB {
+                    r: 255,
+                    g: 217,
+                    b: 47,
+                },
+                RGB {
+                    r: 229,
+                    g: 196,
+                    b: 148,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 102,
+                    g: 194,
+                    b: 165,
+                },
+                RGB {
+                    r: 252,
+                    g: 141,
+                    b: 98,
+                },
+                RGB {
+                    r: 141,
+                    g: 160,
+                    b: 203,
+                },
+                RGB {
+                    r: 231,
+                    g: 138,
+                    b: 195,
+                },
+                RGB {
+                    r: 166,
+                    g: 216,
+                    b: 84,
+                },
+                RGB {
+                    r: 255,
+                    g: 217,
+                    b: 47,
+                },
+                RGB {
+                    r: 229,
+                    g: 196,
+                    b: 148,
+                },
+                RGB {
+                    r: 179,
+                    g: 179,
+                    b: 179,
+                },
+            ]),
+            _ => None,
+        },
+        Palette::Set3 => match nb_value {
+            3 => Some(vec![
+                RGB {
+                    r: 141,
+                    g: 211,
+                    b: 199,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 179,
+                },
+                RGB {
+                    r: 190,
+                    g: 186,
+                    b: 218,
+                },
+            ]),
+            4 => Some(vec![
+                RGB {
+                    r: 141,
+                    g: 211,
+                    b: 199,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 179,
+                },
+                RGB {
+                    r: 190,
+                    g: 186,
+                    b: 218,
+                },
+                RGB {
+                    r: 251,
+                    g: 128,
+                    b: 114,
+                },
+            ]),
+            5 => Some(vec![
+                RGB {
+                    r: 141,
+                    g: 211,
+                    b: 199,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 179,
+                },
+                RGB {
+                    r: 190,
+                    g: 186,
+                    b: 218,
+                },
+                RGB {
+                    r: 251,
+                    g: 128,
+                    b: 114,
+                },
+                RGB {
+                    r: 128,
+                    g: 177,
+                    b: 211,
+                },
+            ]),
+            6 => Some(vec![
+                RGB {
+                    r: 141,
+                    g: 211,
+                    b: 199,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 179,
+                },
+                RGB {
+                    r: 190,
+                    g: 186,
+                    b: 218,
+                },
+                RGB {
+                    r: 251,
+                    g: 128,
+                    b: 114,
+                },
+                RGB {
+                    r: 128,
+                    g: 177,
+                    b: 211,
+                },
+                RGB {
+                    r: 253,
+                    g: 180,
+                    b: 98,
+                },
+            ]),
+            7 => Some(vec![
+                RGB {
+                    r: 141,
+                    g: 211,
+                    b: 199,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 179,
+                },
+                RGB {
+                    r: 190,
+                    g: 186,
+                    b: 218,
+                },
+                RGB {
+                    r: 251,
+                    g: 128,
+                    b: 114,
+                },
+                RGB {
+                    r: 128,
+                    g: 177,
+                    b: 211,
+                },
+                RGB {
+                    r: 253,
+                    g: 180,
+                    b: 98,
+                },
+                RGB {
+                    r: 179,
+                    g: 222,
+                    b: 105,
+                },
+            ]),
+            8 => Some(vec![
+                RGB {
+                    r: 141,
+                    g: 211,
+                    b: 199,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 179,
+                },
+                RGB {
+                    r: 190,
+                    g: 186,
+                    b: 218,
+                },
+                RGB {
+                    r: 251,
+                    g: 128,
+                    b: 114,
+                },
+                RGB {
+                    r: 128,
+                    g: 177,
+                    b: 211,
+                },
+                RGB {
+                    r: 253,
+                    g: 180,
+                    b: 98,
+                },
+                RGB {
+                    r: 179,
+                    g: 222,
+                    b: 105,
+                },
+                RGB {
+                    r: 252,
+                    g: 205,
+                    b: 229,
+                },
+            ]),
+            9 => Some(vec![
+                RGB {
+                    r: 141,
+                    g: 211,
+                    b: 199,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 179,
+                },
+                RGB {
+                    r: 190,
+                    g: 186,
+                    b: 218,
+                },
+                RGB {
+                    r: 251,
+                    g: 128,
+                    b: 114,
+                },
+                RGB {
+                    r: 128,
+                    g: 177,
+                    b: 211,
+                },
+                RGB {
+                    r: 253,
+                    g: 180,
+                    b: 98,
+                },
+                RGB {
+                    r: 179,
+                    g: 222,
+                    b: 105,
+                },
+                RGB {
+                    r: 252,
+                    g: 205,
+                    b: 229,
+                },
+                RGB {
+                    r: 217,
+                    g: 217,
+                    b: 217,
+                },
+            ]),
+            10 => Some(vec![
+                RGB {
+                    r: 141,
+                    g: 211,
+                    b: 199,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 179,
+                },
+                RGB {
+                    r: 190,
+                    g: 186,
+                    b: 218,
+                },
+                RGB {
+                    r: 251,
+                    g: 128,
+                    b: 114,
+                },
+                RGB {
+                    r: 128,
+                    g: 177,
+                    b: 211,
+                },
+                RGB {
+                    r: 253,
+                    g: 180,
+                    b: 98,
+                },
+                RGB {
+                    r: 179,
+                    g: 222,
+                    b: 105,
+                },
+                RGB {
+                    r: 252,
+                    g: 205,
+                    b: 229,
+                },
+                RGB {
+                    r: 217,
+                    g: 217,
+                    b: 217,
+                },
+                RGB {
+                    r: 188,
+                    g: 128,
+                    b: 189,
+                },
+            ]),
+            11 => Some(vec![
+                RGB {
+                    r: 141,
+                    g: 211,
+                    b: 199,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 179,
+                },
+                RGB {
+                    r: 190,
+                    g: 186,
+                    b: 218,
+                },
+                RGB {
+                    r: 251,
+                    g: 128,
+                    b: 114,
+                },
+                RGB {
+                    r: 128,
+                    g: 177,
+                    b: 211,
+                },
+                RGB {
+                    r: 253,
+                    g: 180,
+                    b: 98,
+                },
+                RGB {
+                    r: 179,
+                    g: 222,
+                    b: 105,
+                },
+                RGB {
+                    r: 252,
+                    g: 205,
+                    b: 229,
+                },
+                RGB {
+                    r: 217,
+                    g: 217,
+                    b: 217,
+                },
+                RGB {
+                    r: 188,
+                    g: 128,
+                    b: 189,
+                },
+                RGB {
+                    r: 204,
+                    g: 235,
+                    b: 197,
+                },
+            ]),
+            12 => Some(vec![
+                RGB {
+                    r: 141,
+                    g: 211,
+                    b: 199,
+                },
+                RGB {
+                    r: 255,
+                    g: 255,
+                    b: 179,
+                },
+                RGB {
+                    r: 190,
+                    g: 186,
+                    b: 218,
+                },
+                RGB {
+                    r: 251,
+                    g: 128,
+                    b: 114,
+                },
+                RGB {
+                    r: 128,
+                    g: 177,
+                    b: 211,
+                },
+                RGB {
+                    r: 253,
+                    g: 180,
+                    b: 98,
+                },
+                RGB {
+                    r: 179,
+                    g: 222,
+                    b: 105,
+                },
+                RGB {
+                    r: 252,
+                    g: 205,
+                    b: 229,
+                },
+                RGB {
+                    r: 217,
+                    g: 217,
+                    b: 217,
+                },
+                RGB {
+                    r: 188,
+                    g: 128,
+                    b: 189,
+                },
+                RGB {
+                    r: 204,
+                    g: 235,
+                    b: 197,
+                },
+                RGB {
+                    r: 255,
+                    g: 237,
+                    b: 111,
+                },
+            ]),
+            _ => None,
+        },
     }
 }
 
-
 #[cfg(test)]
 mod tests {
-    use {Palette, get_color_ramp};
-    #[test]
-    fn it_works() {
-        let ramp = get_color_ramp(Palette::Pastel2, 3);
-        assert_eq!(ramp, Some(vec!["#b3e2cd", "#fdcdac", "#cbd5e8"]));
+    use crate::{get_color_ramp, Palette};
+    use rgb::RGB;
 
+    #[test]
+    fn test_get_color_ramp() {
+        let ramp = get_color_ramp(Palette::Pastel2, 3);
+        assert_eq!(
+            ramp,
+            Some(vec![
+                RGB {
+                    r: 179,
+                    g: 226,
+                    b: 205
+                },
+                RGB {
+                    r: 253,
+                    g: 205,
+                    b: 172
+                },
+                RGB {
+                    r: 203,
+                    g: 213,
+                    b: 232
+                }
+            ])
+        );
+    }
+
+    #[test]
+    fn test_palette_enum_from_string() {
         let palette_pastel2: Palette = "Pastel2".parse().unwrap();
         assert_eq!(palette_pastel2, Palette::Pastel2);
-        assert_eq!(get_color_ramp(palette_pastel2, 3), ramp);
     }
 }
