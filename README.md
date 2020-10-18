@@ -1,5 +1,6 @@
 # colorbrewer-rs
 [![Build Status](https://travis-ci.org/mthh/colorbrewer-rs.svg?branch=master)](https://travis-ci.org/mthh/colorbrewer-rs)
+[![Crates.io](https://img.shields.io/crates/v/colorbrewer.svg)](https://crates.io/crates/colorbrewer)
 
 Get a `Vec` of colors (described using [rgb](https://crates.io/crates/rgb) crate) from one of the famous _**ColorBrewer**_ palette.
 These color specifications and designs are developed by Cynthia Brewer (http://colorbrewer2.org/).
